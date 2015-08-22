@@ -10,11 +10,11 @@ public enum Images {
     LOGO("/com/breakfastsoftware/kraken/res/breakfast.png");
 
     protected BufferedImage image;
-    protected int pixels[];
+    protected int[] pixels;
 
     private Images(String path) {
         image = ImageLoader.loadImage(path);
-        pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+        image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
     }
 
     public BufferedImage getImage() {
