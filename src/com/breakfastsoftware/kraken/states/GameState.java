@@ -4,7 +4,6 @@ import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.res.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
-import sun.security.krb5.internal.KrbErrException;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
