@@ -20,7 +20,7 @@ public class GameState extends ImagedState {
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 150, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale + 361,
-                Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale + 254);
+                Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale + 254, camera);
         em = new EntityManager();
         em.addCloud(new Cloud(-100, 10));
         em.addCloud(new Cloud(522, 13));
