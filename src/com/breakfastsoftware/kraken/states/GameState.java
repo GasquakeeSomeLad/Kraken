@@ -1,7 +1,7 @@
 package com.breakfastsoftware.kraken.states;
 
 import com.breakfastsoftware.kraken.Kraken;
-import com.breakfastsoftware.kraken.entities.Entity;
+import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.res.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class GameState extends ImagedState {
     //TEMP
-    Entity entity = new Cloud(100, 10);
+    Entity cloud1 = new Cloud(-100, 10), cloud2 = new Cloud(517, 13), cloud3 = new Cloud(1262, 8);
 
     private boolean left, right, up, down;
     private Camera camera;
@@ -38,6 +38,7 @@ public class GameState extends ImagedState {
         if (down)
             camera.move(0, 2);
 
+        cloud1.update(); cloud2.update(); cloud3.update();
     }
 
     private void updateKeys() {
@@ -68,7 +69,10 @@ public class GameState extends ImagedState {
             for (int j = 0; j < height; j++)
                 pixels[i+j*width] = Images.BACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
 
-        entity.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
+        cloud1.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
+        cloud2.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
+        cloud3.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
+
         super.render(g);
     }
 

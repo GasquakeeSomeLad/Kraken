@@ -1,4 +1,4 @@
-package com.breakfastsoftware.kraken.entities;
+package com.breakfastsoftware.kraken.entities.core;
 
 import com.breakfastsoftware.kraken.res.Sprite;
 
@@ -103,5 +103,4 @@ public abstract class Entity {
     public void setDy(int dy) {
         this.dy = dy;
     }
-
 }
