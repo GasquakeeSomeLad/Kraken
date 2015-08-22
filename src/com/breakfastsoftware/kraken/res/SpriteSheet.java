@@ -3,17 +3,19 @@ package com.breakfastsoftware.kraken.res;
 import java.awt.image.BufferedImage;
 
 public class SpriteSheet {
-
-	BufferedImage image;
+	private Images image;
 	
-	public SpriteSheet(BufferedImage image) {
+	public SpriteSheet(Images image) {
 		this.image = image;
 	}
 	
-	public BufferedImage getImage(int x, int y, int w, int h) {
-		BufferedImage img;
-		img = image.getSubimage(x, y, w, h);
-		return img;
+	public int[] getPixels(int x, int y, int w, int h) {
+		int[] pixels = new int[w*h];
+		for (int i = 0; i < w; i++) {
+			for (int j = 0; j < j; j++) {
+				pixels[i+j*w] = image.getPixels()[(i+x)+(j+y)*w];
+			}
+		}
+		return pixels;
 	}
-	
 }
