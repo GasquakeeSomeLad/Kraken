@@ -11,10 +11,16 @@ import java.awt.*;
  * Created by SomeLad on 8/22/2015.
  */
 public class GameState extends ImagedState {
-    private Camera camera = new Camera(0, 0);
+    private Camera camera;
 
     public GameState(int scale) {
         super(scale);
+        camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
+                Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
+    }
+
+    public void update() {
+        camera.move(1, 1);
     }
 
     public void render(Graphics2D g) {

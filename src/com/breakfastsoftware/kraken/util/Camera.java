@@ -3,12 +3,14 @@ package com.breakfastsoftware.kraken.util;
 import java.awt.Graphics2D;
 
 public class Camera {
-	private int x, y;
+	private int x, y, maxX, maxY;
 	private int dx, dy;
   
-  	public Camera(int x, int y) {
+  	public Camera(int x, int y, int maxX, int maxY) {
   		this.x = x;
   		this.y = y;
+		this.maxX = maxX;
+		this.maxY = maxY;
   	}
   
   	public void update() {
@@ -18,6 +20,16 @@ public class Camera {
   	public void move(int dx, int dy) {
   		x += dx;
   		y += dy;
+
+		if (x < 0)
+			x = 0;
+		else if (x >= maxX)
+			x = maxX-1;
+
+		if (y < 0)
+			y = 0;
+		else if (y >= maxY)
+			y = maxY-1;
   	}
   
   	public int getX() {
