@@ -7,7 +7,8 @@ import java.awt.image.DataBufferInt;
  * Created by SomeLad on 8/21/2015.
  */
 public enum Images {
-    LOGO("/com/breakfastsoftware/kraken/res/breakfast.png");
+    LOGO("/com/breakfastsoftware/kraken/res/breakfast.png"),
+    MENU("/com/breakfastsoftware/kraken/res/menu.png");
 
     protected BufferedImage image;
     protected int[] pixels;

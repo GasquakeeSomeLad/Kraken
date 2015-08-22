@@ -17,7 +17,7 @@ public class Kraken extends Canvas implements Runnable {
 	private static int width = 800, height = 600;
 	private static String title = "Kraken";
 	private static boolean running = false;
-	private StateManager stateManager;
+	private static StateManager stateManager;
 	private Thread thread;
 	private static Mouse mouse;
 	private static Keyboard keyboard;
@@ -124,5 +124,6 @@ public class Kraken extends Canvas implements Runnable {
     public static int getGameHeight() {
         return height;
     }
-    
+
+	public static StateManager getStateManager() { return stateManager;}
 }
