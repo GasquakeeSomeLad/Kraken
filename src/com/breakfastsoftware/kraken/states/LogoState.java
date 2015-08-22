@@ -1,10 +1,11 @@
 package com.breakfastsoftware.kraken.states;
 
-/**
- * Created by SomeLad on 8/21/2015.
- */
+import com.breakfastsoftware.kraken.states.core.ImagedState;
+
 public class LogoState extends ImagedState {
-    public LogoState(int scale) {
-        super(scale);
-    }
+
+	public LogoState(int scale) {
+		super(scale);
+	}
+	
 }

@@ -1,21 +1,24 @@
 package com.breakfastsoftware.kraken;
 
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import com.breakfastsoftware.kraken.states.LogoState;
+import com.breakfastsoftware.kraken.states.core.StateManager;
 
 public class Kraken extends Canvas implements Runnable {
+	
 	private static final long serialVersionUID = 1L;
 	private static int width = 800, height = 600;
 	private static String title = "Kraken";
 	private static boolean running = false;
+	private StateManager stateManager;
 	private Thread thread;
 
-    private Kraken() {}
-	
 	public void init() {
 		requestFocus();
+		stateManager = new StateManager(new LogoState(1));
 	}
 	
 	public synchronized void start() {
@@ -69,14 +72,14 @@ public class Kraken extends Canvas implements Runnable {
 	}
 	
 	public void update() {
-		
+		stateManager.update();
 	}
 	
 	public void render() {
         BufferStrategy bs = getBufferStrategy();
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		
-		//state.render(g);
+		stateManager.render(g);
 		
 		g.dispose();
 		bs.show();

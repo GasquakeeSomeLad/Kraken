@@ -1,16 +1,13 @@
 package com.breakfastsoftware.kraken.input;
 
-import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javax.swing.SwingUtilities;
 
-/**
- * Created by SomeLad on 8/21/2015.
- */
 public class Mouse implements MouseListener, MouseMotionListener {
+	
     public static final int INVALID = -1;
-
     private boolean right = false, left = false;
     private int x = 0, y = 0, x2 = -1, y2 = -1;
 
@@ -19,18 +16,18 @@ public class Mouse implements MouseListener, MouseMotionListener {
             left = true;
             x2 = ev.getX();
             y2 = ev.getY();
+        } else {
+        	right = true;
         }
-        else
-            right = true;
     }
 
     public void mouseReleased(MouseEvent ev) {
         if (SwingUtilities.isLeftMouseButton(ev)) {
             left = false;
             x2 = y2 = -1;
+        } else {
+        	right = false;
         }
-        else
-            right = false;
     }
 
     public void mouseDragged(MouseEvent ev) {
