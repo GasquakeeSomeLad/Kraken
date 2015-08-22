@@ -3,7 +3,11 @@ package com.breakfastsoftware.kraken;
 import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
+
+import com.breakfastsoftware.kraken.input.Keyboard;
+import com.breakfastsoftware.kraken.input.Mouse;
 import com.breakfastsoftware.kraken.states.LogoState;
 import com.breakfastsoftware.kraken.states.core.StateManager;
 
@@ -15,9 +19,16 @@ public class Kraken extends Canvas implements Runnable {
 	private static boolean running = false;
 	private StateManager stateManager;
 	private Thread thread;
+	private static Mouse mouse;
+	private static Keyboard keyboard;
 
 	public void init() {
 		requestFocus();
+		mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+		keyboard = new Keyboard();
+		addKeyListener(keyboard);
 		stateManager = new StateManager(new LogoState(1));
 	}
 	
@@ -97,6 +108,14 @@ public class Kraken extends Canvas implements Runnable {
         kraken.createBufferStrategy(3);
 		kraken.start();
 	}
+	
+	public static Keyboard getKeyboard() {
+		return keyboard;
+	}
+	
+	public static Mouse getMouse() {
+		return mouse;
+	}
 
     public static int getGameWidth() {
         return width;
@@ -105,4 +124,5 @@ public class Kraken extends Canvas implements Runnable {
     public static int getGameHeight() {
         return height;
     }
+    
 }
