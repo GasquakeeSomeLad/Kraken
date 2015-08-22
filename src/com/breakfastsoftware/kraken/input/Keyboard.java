@@ -2,52 +2,39 @@ package com.breakfastsoftware.kraken.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Keyboard implements KeyListener {
-	private int keyUp;
-	private int keyDown;
-	
-	public boolean keyUp(int key) {
-		if (keyUp != key) {
-			return false;
-		}
-		keyUp = 0;
-		return true;
-	}
-	
-	public boolean keyDown(int key) {
-		if (keyDown != key) {
-			return false;
-		}
-		keyDown = 0;
-		return true;
-	}
+	private ArrayList<Integer> keys = new ArrayList<Integer>();
 	
 	public void keyPressed(KeyEvent e) {
-		keyDown = e.getKeyCode();
+		if (!keyDown(e.getKeyCode()))
+			keys.add(e.getKeyCode());
 	}
 
 	public void keyReleased(KeyEvent e) {
-		keyUp = e.getKeyCode();
+		for (int i = 0; i < keys.size(); i++)
+			if (keys.get(i).intValue() == e.getKeyCode()) {
+				keys.remove(i);
+				return;
+			}
+
 	}
 
 	public void keyTyped(KeyEvent e) {
 	}
 
-	public int getKeyUp() {
-		return keyUp;
+	public boolean keyDown(int key) {
+		for (int i = 0; i < keys.size(); i++) {
+			if (keys.get(i).intValue() == key) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void setKeyUp(int keyUp) {
-		this.keyUp = keyUp;
-	}
-
-	public int getKeyDown() {
-		return keyDown;
-	}
-
-	public void setKeyDown(int keyDown) {
-		this.keyDown = keyDown;
+	public boolean keyUp(int key) {
+		return !keyDown(key);
 	}
 
 }
