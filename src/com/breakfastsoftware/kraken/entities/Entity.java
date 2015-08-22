@@ -19,8 +19,8 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public void render(int screenX, int screenY, int screenWidth, int[] pixels) {
-        int renderX = x - screenX, renderY = (y) - screenY;
+    public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
+        int renderX = x - cameraX, renderY = (y) - cameraY;
         if (renderX < -sprite.WIDTH || renderX > 250)
             return;
         if (renderY < -sprite.HEIGHT || renderY > 200)

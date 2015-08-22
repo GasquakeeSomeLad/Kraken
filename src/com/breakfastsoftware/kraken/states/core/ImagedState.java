@@ -6,12 +6,13 @@ import java.awt.image.DataBufferInt;
 import com.breakfastsoftware.kraken.Kraken;
 
 public class ImagedState extends State {
-	
+    protected int scale;
 	protected BufferedImage image;
 	protected int[] pixels;
 
     public ImagedState(int scale) {
-        image = new BufferedImage(Kraken.getGameWidth() / scale, Kraken.getGameWidth() / scale, BufferedImage.TYPE_INT_RGB);
+        this.scale = scale;
+        image = new BufferedImage(Kraken.getGameWidth() / scale, Kraken.getGameHeight() / scale, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
