@@ -16,7 +16,7 @@ public class LogoState extends ImagedState {
 
 	public void update() {
 		if (--counter < 0)
-			Kraken.getStateManager().setState(new MenuState(1));
+			Kraken.getStateManager().setState(new GameState(2));
 	}
 
 }

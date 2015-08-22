@@ -10,5 +10,5 @@ public class GameState extends ImagedState {
     public GameState(int scale) {
         super(scale);
     }
-    
+
 }

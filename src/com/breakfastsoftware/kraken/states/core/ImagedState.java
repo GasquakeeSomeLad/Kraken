@@ -20,6 +20,6 @@ public class ImagedState extends State {
     }
 
     public void render(Graphics2D g) {
-    	g.drawImage(image, 0, 0, null);
+    	g.drawImage(image, 0, 0, Kraken.getGameWidth(), Kraken.getGameHeight(), null);
     }
 }
