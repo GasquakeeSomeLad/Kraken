@@ -6,7 +6,7 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.states.core.StateManager;
 
 public class LogoState extends ImagedState {
-	protected int counter = 70;
+	protected int counter = 110;
 
 	public LogoState(int scale) {
 		super(scale);
