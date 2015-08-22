@@ -8,22 +8,23 @@ public abstract class Entity {
     public static final int RIGHT = 0, LEFT = 1;
 
     protected int x, y, w, h;
-    protected int dx, dy, direction = LEFT;
+    protected int dx, dy, direction = RIGHT;
 
     protected Sprite sprite;
 
-    public Entity(int x, int y) {
+    public Entity(int x, int y, Sprite sprite) {
         this.x = x;
         this.y = y;
+        this.sprite = sprite;
     }
 
     public abstract void update();
 
     public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
         int renderX = x - cameraX, renderY = (y) - cameraY;
-        if (renderX < -sprite.WIDTH || renderX > 250)
+        if (renderX < -sprite.WIDTH || renderX > 400)
             return;
-        if (renderY < -sprite.HEIGHT || renderY > 200)
+        if (renderY < -sprite.HEIGHT || renderY > 300)
             return;
 
         int i = 0, k = 0, renderWidth=sprite.WIDTH, renderHeight=sprite.HEIGHT;
@@ -31,11 +32,10 @@ public abstract class Entity {
             i = -renderX;
         if (renderY < 0)
             k = -renderY;
-        if (renderX > 250-renderWidth)
-            renderWidth = 250-renderX;
-        if (renderY > 200-renderHeight)
-            renderHeight = 200-renderY;
-
+        if (renderX > 400-renderWidth)
+            renderWidth = 400-renderX;
+        if (renderY > 300-renderHeight)
+            renderHeight = 300-renderY;
 
         if (direction == RIGHT) {
             for (; i < renderWidth; i++)

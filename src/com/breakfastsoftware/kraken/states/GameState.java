@@ -1,6 +1,8 @@
 package com.breakfastsoftware.kraken.states;
 
 import com.breakfastsoftware.kraken.Kraken;
+import com.breakfastsoftware.kraken.entities.Entity;
+import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.res.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
@@ -12,6 +14,9 @@ import java.awt.event.KeyEvent;
  * Created by SomeLad on 8/22/2015.
  */
 public class GameState extends ImagedState {
+    //TEMP
+    Entity entity = new Cloud(100, 10);
+
     private boolean left, right, up, down;
     private Camera camera;
 
@@ -62,6 +67,8 @@ public class GameState extends ImagedState {
         for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++)
                 pixels[i+j*width] = Images.BACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
+
+        entity.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         super.render(g);
     }
 

@@ -12,7 +12,7 @@ public class ImagedState extends State {
 
     public ImagedState(int scale) {
         this.scale = scale;
-        image = new BufferedImage(Kraken.getGameWidth() / scale, Kraken.getGameWidth() / scale, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(Kraken.getGameWidth() / scale, Kraken.getGameHeight() / scale, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
