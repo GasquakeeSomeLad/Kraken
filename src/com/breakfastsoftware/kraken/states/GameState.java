@@ -3,6 +3,7 @@ package com.breakfastsoftware.kraken.states;
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.Cloud;
+import com.breakfastsoftware.kraken.entities.core.EntityManager;
 import com.breakfastsoftware.kraken.res.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
@@ -14,16 +15,18 @@ import java.awt.event.KeyEvent;
  * Created by SomeLad on 8/22/2015.
  */
 public class GameState extends ImagedState {
-    //TEMP
-    Entity cloud1 = new Cloud(-100, 10), cloud2 = new Cloud(517, 13), cloud3 = new Cloud(1262, 8);
-
     private boolean left, right, up, down;
     private Camera camera;
+    private EntityManager em = new EntityManager();
 
     public GameState() {
         super(2);
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
+
+        em.addCloud(new Cloud(-100, 10));
+        em.addCloud(new Cloud(522, 13));
+        em.addCloud(new Cloud(1101, 8));
     }
 
     public void update() {
@@ -38,7 +41,7 @@ public class GameState extends ImagedState {
         if (down)
             camera.move(0, 2);
 
-        cloud1.update(); cloud2.update(); cloud3.update();
+        em.update();
     }
 
     private void updateKeys() {
@@ -69,10 +72,7 @@ public class GameState extends ImagedState {
             for (int j = 0; j < height; j++)
                 pixels[i+j*width] = Images.BACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
 
-        cloud1.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
-        cloud2.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
-        cloud3.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
-
+        em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         super.render(g);
     }
 
