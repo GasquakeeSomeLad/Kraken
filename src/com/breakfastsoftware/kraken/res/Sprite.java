@@ -5,7 +5,7 @@ package com.breakfastsoftware.kraken.res;
  */
 public class Sprite {
     public static final Sprite CLOUD = new Sprite(SpriteSheet.TESTING, 0, 0, 238, 70),
-    HEAD = new Sprite(SpriteSheet.ENTITIES, 0, 0, 32, 32);
+    PLAYERHEAD = new Sprite(SpriteSheet.ENTITIES, 0, 0, 128, 32);
 
     public final int WIDTH, HEIGHT, PIXELS[];
 

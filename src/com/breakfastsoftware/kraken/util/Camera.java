@@ -1,8 +1,7 @@
 package com.breakfastsoftware.kraken.util;
 
-import java.awt.Graphics2D;
-
 public class Camera {
+	
 	private int x, y, maxX, maxY;
 	private int dx, dy;
   
@@ -47,4 +46,20 @@ public class Camera {
   	public void setY(int y) {
   		this.y = y;
   	}
+
+	public int getDx() {
+		return dx;
+	}
+
+	public void setDx(int dx) {
+		this.dx = dx;
+	}
+
+	public int getDy() {
+		return dy;
+	}
+
+	public void setDy(int dy) {
+		this.dy = dy;
+	}
 }

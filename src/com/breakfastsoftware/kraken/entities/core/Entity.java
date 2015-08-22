@@ -8,7 +8,7 @@ public abstract class Entity {
     public static final int RIGHT = 0, LEFT = 1;
 
     protected int x, y, w, h;
-    protected int dx, dy, direction = RIGHT;
+    protected int dx, dy, direction = LEFT;
 
     protected Sprite sprite;
 
@@ -37,13 +37,13 @@ public abstract class Entity {
         if (renderY > 300-renderHeight)
             renderHeight = 300-renderY;
 
-        if (direction == RIGHT) {
+        if (direction == LEFT) {
             for (; i < renderWidth; i++)
                 for (int j = k; j < renderHeight; j++)
                     if (sprite.PIXELS[i+j*sprite.WIDTH] != 0xFFFF00FF)
                         pixels[(renderX+i)+(renderY+j)*screenWidth] = sprite.PIXELS[i+j*sprite.WIDTH];
         }
-        else if (direction == LEFT) {
+        else if (direction == RIGHT) {
             for (; i < renderWidth; i++)
                 for (int j = k; j < renderHeight; j++)
                     if (sprite.PIXELS[(sprite.WIDTH-i-1)+j*sprite.WIDTH] != 0xFFFF00FF)

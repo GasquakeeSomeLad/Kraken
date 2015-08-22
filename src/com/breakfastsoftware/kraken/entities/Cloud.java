@@ -11,7 +11,7 @@ public class Cloud extends Entity {
     protected int counter = 5;
 
     public Cloud(int x, int y) {
-        super(x, y, Sprite.HEAD);
+        super(x, y, Sprite.CLOUD);
     }
 
     @Override
