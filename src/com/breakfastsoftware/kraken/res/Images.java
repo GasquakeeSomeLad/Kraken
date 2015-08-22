@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 public enum Images {
     BACKGROUND("/com/breakfastsoftware/kraken/res/background.png"),
     CLOUD("/com/breakfastsoftware/kraken/res/cloud.png"),
+    ENTITIES("/com/breakfastsoftware/kraken/res/kraken.png"),
     LOGO("/com/breakfastsoftware/kraken/res/breakfast.png"),
     MENU("/com/breakfastsoftware/kraken/res/menu.png");
 
