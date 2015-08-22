@@ -11,7 +11,7 @@ public class Keyboard implements KeyListener {
 		if (keyUp != key) {
 			return false;
 		}
-		keyDown = 0;
+		keyUp = 0;
 		return true;
 	}
 	

@@ -7,13 +7,13 @@ import java.awt.image.DataBufferInt;
  * Created by SomeLad on 8/21/2015.
  */
 public enum Images {
-    IMAGE("No paths yet");
+    LOGO("/com/breakfastsoftware/kraken/res/breakfast.png");
 
     protected BufferedImage image;
-    protected int[] pixels;
+    protected int pixels[];
 
     private Images(String path) {
-        ImageLoader.loadImage(path);
+        image = ImageLoader.loadImage(path);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
 
