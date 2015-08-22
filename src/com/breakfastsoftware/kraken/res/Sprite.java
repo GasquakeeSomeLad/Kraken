@@ -11,4 +11,5 @@ public class Sprite {
         WIDTH = w;
         HEIGHT = h;
     }
+
 }
