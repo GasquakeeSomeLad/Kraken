@@ -7,15 +7,15 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
 public class LogoState extends ImagedState {
 	protected int counter = 110;
 
-	public LogoState(int scale) {
-		super(scale);
+	public LogoState() {
+		super(1);
 
 		image = Images.LOGO.getImage();
 	}
 
 	public void update() {
 		if (--counter < 0)
-			Kraken.getStateManager().setState(new GameState(2));
+			Kraken.getStateManager().setState(new GameState());
 	}
 
 }

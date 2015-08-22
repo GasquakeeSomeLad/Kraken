@@ -8,8 +8,8 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
  */
 public class MenuState extends ImagedState {
 
-    public MenuState(int scale) {
-        super(scale);
+    public MenuState() {
+        super(1);
 
         image = Images.MENU.getImage();
     }

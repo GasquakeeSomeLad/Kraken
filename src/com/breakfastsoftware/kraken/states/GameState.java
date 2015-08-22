@@ -15,8 +15,8 @@ public class GameState extends ImagedState {
     private boolean left, right, up, down;
     private Camera camera;
 
-    public GameState(int scale) {
-        super(scale);
+    public GameState() {
+        super(2);
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
     }

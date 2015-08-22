@@ -29,7 +29,7 @@ public class Kraken extends Canvas implements Runnable {
 		addMouseMotionListener(mouse);
 		keyboard = new Keyboard();
 		addKeyListener(keyboard);
-		stateManager = new StateManager(new LogoState(1));
+		stateManager = new StateManager(new LogoState());
 	}
 	
 	public synchronized void start() {
