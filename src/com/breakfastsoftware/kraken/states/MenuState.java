@@ -15,6 +15,7 @@ public class MenuState extends ImagedState {
 	private Font titleFont, optionFont;
 	private Color[] optionColors;
 	private int optionPicked = 0;
+	private boolean down = false, up = false;
 	
     public MenuState() {
         super(1);
@@ -29,7 +30,8 @@ public class MenuState extends ImagedState {
     }
     
     public void update() {
-    	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_DOWN)) {
+    	if (!down && Kraken.getKeyboard().keyDown(KeyEvent.VK_DOWN)) {
+			down = true;
     		if (optionPicked < 3) {
     			optionPicked++;
     		} else {
@@ -40,7 +42,11 @@ public class MenuState extends ImagedState {
     		}
     		optionColors[optionPicked] = new Color(0, 0, 0, 230);
     	}
-    	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_UP)) {
+		else if (down && Kraken.getKeyboard().keyUp(KeyEvent.VK_DOWN)) {
+			down = false;
+		}
+    	if (!up && Kraken.getKeyboard().keyDown(KeyEvent.VK_UP)) {
+			up = true;
     		if (optionPicked > 0) {
     			optionPicked--;
     		} else {
@@ -51,6 +57,9 @@ public class MenuState extends ImagedState {
     		}
     		optionColors[optionPicked] = new Color(0, 0, 0, 230);
     	}
+		else if (up && Kraken.getKeyboard().keyUp(KeyEvent.VK_UP)) {
+			up = false;
+		}
     	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_ENTER)) {
     		if (optionPicked == 0) {
     			Kraken.getStateManager().setState(new GameState());
