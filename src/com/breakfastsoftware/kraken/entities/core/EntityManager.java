@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.breakfastsoftware.kraken.entities.Bullet;
 import com.breakfastsoftware.kraken.entities.Cloud;
+import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Ship;
 
 public class EntityManager {
@@ -11,6 +12,7 @@ public class EntityManager {
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Ship> ships;
 	private ArrayList<Bullet> bullets;
+	private Fish fish;
 
 	public EntityManager() {
 		clouds = new ArrayList<Cloud>();
@@ -25,8 +27,11 @@ public class EntityManager {
 		for (Ship ship : ships) {
 			ship.update();
 		}
-		for (Bullet bullet : bullets) {
-			bullet.update();
+		for (int i = 0; i < bullets.size(); i ++) {
+			bullets.get(i).update();
+		}
+		if (fish != null) {
+			fish.update();
 		}
 	}
 
@@ -40,6 +45,16 @@ public class EntityManager {
 		for (Bullet bullet : bullets) {
 			bullet.render(cameraX, cameraY, screenWidth, pixels);
 		}
+		if (fish != null)
+			fish.render(cameraX, cameraY, screenWidth, pixels);
+	}
+
+	public void addBullet(Bullet bullet) {
+		bullets.add(bullet);
+	}
+
+	public void removeBullet(Bullet bullet) {
+		bullets.remove(bullet);
 	}
 
 	public void addCloud(Cloud cloud) {
@@ -50,13 +65,11 @@ public class EntityManager {
 		clouds.remove(cloud);
 	}
 
-	public void addBullet(Bullet bullet) {
-		bullets.add(bullet);
+	public void setFish(Fish fish) {
+		this.fish = fish;
 	}
 
-	public void removeBullet(Bullet bullet) {
-		bullets.remove(bullet);
-	}
+	public boolean noFish() { return fish == null;}
 
 	public void addShip(Ship ship) {
 		ships.add(ship);

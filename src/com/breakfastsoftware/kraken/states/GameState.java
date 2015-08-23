@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.Cloud;
+import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
@@ -19,6 +20,7 @@ public class GameState extends ImagedState {
 
     private Images backgroundImage = Images.BACKGROUND;
     private boolean lenky = false;
+    private int fishTimer= 60 * 15;
 
     public GameState() {
         super(2);
@@ -39,6 +41,10 @@ public class GameState extends ImagedState {
 
     public void update() {
         player.update();
+        if (em.noFish() && --fishTimer < 0) {
+            em.setFish(new Fish(em, player));
+            fishTimer = 60*15;
+        }
         em.update();
         camera.setX(player.getX() - 120);
         camera.setY(player.getY() - 120);
