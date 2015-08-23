@@ -18,7 +18,6 @@ public class Keyboard implements KeyListener {
 				keys.remove(i);
 				return;
 			}
-
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -36,5 +35,4 @@ public class Keyboard implements KeyListener {
 	public boolean keyUp(int key) {
 		return !keyDown(key);
 	}
-
 }

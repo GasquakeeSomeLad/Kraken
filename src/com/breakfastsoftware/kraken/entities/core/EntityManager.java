@@ -2,13 +2,15 @@ package com.breakfastsoftware.kraken.entities.core;
 
 import java.util.ArrayList;
 import com.breakfastsoftware.kraken.entities.Cloud;
+import com.breakfastsoftware.kraken.entities.Ship;
 
 public class EntityManager {
-
-	public ArrayList<Cloud> clouds;
+	private ArrayList<Cloud> clouds;
+	private ArrayList<Ship> ships;
 	
 	public EntityManager() {
 		clouds = new ArrayList<Cloud>();
+		ships = new ArrayList<Ship>();
 	}
 	
 	public void update() {
@@ -30,5 +32,12 @@ public class EntityManager {
 	public void removeCloud(Cloud cloud) {
 		clouds.remove(cloud);
 	}
-	
+
+	public void addShip(Ship ship) {
+		ships.add(ship);
+	}
+
+	public void removeShip(Ship ship) {
+		ships.remove(ship);
+	}
 }
