@@ -71,7 +71,6 @@ public class GameState extends ImagedState {
         else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
             lenky = false;
         }
-        Kraken.getKeyboard().setKeyDown(0);
     }
 
     public void render(Graphics2D g) {

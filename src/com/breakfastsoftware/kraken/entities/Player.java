@@ -31,19 +31,23 @@ public class Player extends Entity {
 
 	public void update() {
 		if (Kraken.getMouse().getX()/2 > x+w/2-camera.getX()) {
+			if (direction == LEFT)
+				move(w-3, 0);
 			direction = RIGHT;
 		}
 		else {
 			if (direction == RIGHT)
-				move(-w+2, 0);
+				move(-w+3, 0);
 			direction = LEFT;
 		}
 		moveLogic();
 
 		if (y < 300 && !jumping) {
 			if (--jumpCounter < 0 && (Kraken.getKeyboard().keyDown(KeyEvent.VK_Z)
-					|| Kraken.getKeyboard().keyDown(KeyEvent.VK_SPACE)))
+					|| Kraken.getKeyboard().keyDown(KeyEvent.VK_SPACE))) {
 				jumping = true;
+				Sound.JUMP.play();
+			}
 		}
 		if (jumping) {
 			move(400, -jumpTime--);
