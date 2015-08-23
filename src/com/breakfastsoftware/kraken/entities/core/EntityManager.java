@@ -21,7 +21,7 @@ public class EntityManager {
 	}
 
 	public void update() {
-		for (int i = 0; i < ships.size(); i++) {
+		for (int i = 0; i < clouds.size(); i++) {
 			clouds.get(i).update();
 		}
 		for (int i = 0; i < ships.size(); i++) {
@@ -36,7 +36,7 @@ public class EntityManager {
 	}
 
 	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
-		for (int i = 0; i < ships.size(); i++) {
+		for (int i = 0; i < clouds.size(); i++) {
 			clouds.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
 		for (int i = 0; i < ships.size(); i++) {
