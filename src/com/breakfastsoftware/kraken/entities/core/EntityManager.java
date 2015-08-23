@@ -21,11 +21,11 @@ public class EntityManager {
 	}
 
 	public void update() {
-		for (Cloud cloud : clouds) {
-			cloud.update();
+		for (int i = 0; i < ships.size(); i++) {
+			clouds.get(i).update();
 		}
-		for (Ship ship : ships) {
-			ship.update();
+		for (int i = 0; i < ships.size(); i++) {
+			ships.get(i).update();
 		}
 		for (int i = 0; i < bullets.size(); i ++) {
 			bullets.get(i).update();
@@ -36,14 +36,14 @@ public class EntityManager {
 	}
 
 	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
-		for (Cloud cloud : clouds) {
-			cloud.render(cameraX, cameraY, screenWidth, pixels);
+		for (int i = 0; i < ships.size(); i++) {
+			clouds.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
-		for (Ship ship : ships) {
-			ship.render(cameraX, cameraY, screenWidth, pixels);
+		for (int i = 0; i < ships.size(); i++) {
+			ships.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
-		for (Bullet bullet : bullets) {
-			bullet.render(cameraX, cameraY, screenWidth, pixels);
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
 		if (fish != null)
 			fish.render(cameraX, cameraY, screenWidth, pixels);
