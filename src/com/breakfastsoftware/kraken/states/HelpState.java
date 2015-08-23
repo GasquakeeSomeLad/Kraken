@@ -10,13 +10,14 @@ import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 
 public class HelpState extends ImagedState {
-	
 	private Font font;
 	
 	public HelpState() {
 		super(1);
 		image = Images.MENU.getImage();
         font = CustomFont.BLACK.getFont(false, true, 40);
+
+		Kraken.getKeyboard().releaseKey(KeyEvent.VK_ENTER);
 	}
 
 	public void update() {

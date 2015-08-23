@@ -17,7 +17,6 @@ public class Player extends Entity {
 	private int jabTimer = 0, jabTime = 7;
 
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
-	private int cameraX;
 
 	public Player(int x, int y, Camera camera) {
 		super(x, y, Sprite.PLAYERHEAD);
@@ -88,9 +87,7 @@ public class Player extends Entity {
 				super.move(0, dy);
 			return;
 		}
-
-		if (x == 0);
-		else if (dx < 0 && direction == RIGHT) {
+		if (dx < 0 && direction == RIGHT) {
 			direction = LEFT;
 			super.move(-w + 3, 0);
 		}

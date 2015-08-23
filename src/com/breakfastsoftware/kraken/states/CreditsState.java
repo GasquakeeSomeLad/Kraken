@@ -18,6 +18,8 @@ public class CreditsState extends ImagedState {
         image = Images.MENU.getImage();
         font = CustomFont.BLACK.getFont(false, true, 35);
         font2 = CustomFont.BLACK.getFont(false, true, 25);
+
+		Kraken.getKeyboard().releaseKey(KeyEvent.VK_ENTER);
     }
     
     public void update() {

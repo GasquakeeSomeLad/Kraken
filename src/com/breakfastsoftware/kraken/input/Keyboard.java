@@ -13,11 +13,7 @@ public class Keyboard implements KeyListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		for (int i = 0; i < keys.size(); i++)
-			if (keys.get(i).intValue() == e.getKeyCode()) {
-				keys.remove(i);
-				return;
-			}
+		releaseKey(e.getKeyCode());
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -34,5 +30,13 @@ public class Keyboard implements KeyListener {
 
 	public boolean keyUp(int key) {
 		return !keyDown(key);
+	}
+
+	public void releaseKey(int key) {
+		for (int i = 0; i < keys.size(); i++)
+			if (keys.get(i).intValue() == key) {
+				keys.remove(i);
+				return;
+			}
 	}
 }
