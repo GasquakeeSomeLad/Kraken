@@ -1,19 +1,24 @@
 package com.breakfastsoftware.kraken.states;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Player;
+import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
 import com.breakfastsoftware.kraken.res.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class GameState extends ImagedState {
-	
 	private Player player;
 	private EntityManager em;
     private Camera camera;
+
+    private Images backgroundImage = Images.BACKGROUND;
+    private boolean lenky = false;
 
     public GameState() {
         super(2);
@@ -21,10 +26,16 @@ public class GameState extends ImagedState {
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 150, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale + 361,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale + 254, camera);
+
         em = new EntityManager();
         em.addCloud(new Cloud(-100, 10));
         em.addCloud(new Cloud(522, 13));
         em.addCloud(new Cloud(1101, 8));
+
+        em.addShip(new Ship(70));
+        em.addShip(new Ship(-20));
+        em.addShip(new Ship(-110));
+        em.addShip(new Ship(-200));
     }
 
     public void update() {
@@ -38,20 +49,31 @@ public class GameState extends ImagedState {
         if (camera.getY() <= 0) {
         	camera.setY(0);
         }
-        if (camera.getX() >= Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale) {
-        	camera.setX(Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale);
+        if (camera.getX() >= backgroundImage.getImage().getWidth() - Kraken.getGameWidth()/scale) {
+        	camera.setX(backgroundImage.getImage().getWidth() - Kraken.getGameWidth() / scale);
         }
-        if (camera.getY() >= Images.BACKGROUND.getImage().getHeight() - Kraken.getGameHeight()/scale) {
-        	camera.setY(Images.BACKGROUND.getImage().getHeight() - Kraken.getGameHeight()/scale);
+        if (camera.getY() >= backgroundImage.getImage().getHeight() - Kraken.getGameHeight()/scale) {
+        	camera.setY(backgroundImage.getImage().getHeight() - Kraken.getGameHeight() / scale);
+        }
+
+        if (!lenky && Kraken.getKeyboard().keyDown(KeyEvent.VK_L)) {
+            lenky = true;
+            if (backgroundImage == Images.BACKGROUND)
+                backgroundImage = Images.LENKY;
+            else
+                backgroundImage = Images.BACKGROUND;
+        }
+        else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
+            lenky = false;
         }
     }
 
     public void render(Graphics2D g) {
         int width = Kraken.getGameWidth()/scale, height = Kraken.getGameHeight()/scale,
-                imageWidth = Images.BACKGROUND.getImage().getWidth();
+                imageWidth = backgroundImage.getImage().getWidth();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                pixels[i+j*width] = Images.BACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
+                pixels[i+j*width] = backgroundImage.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
             }
         }
         em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);

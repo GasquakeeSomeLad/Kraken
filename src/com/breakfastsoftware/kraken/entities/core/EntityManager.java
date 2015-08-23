@@ -14,14 +14,20 @@ public class EntityManager {
 	}
 	
 	public void update() {
-		for (int i = 0; i < clouds.size(); i++) {
-			clouds.get(i).update();
+		for (Cloud cloud : clouds) {
+			cloud.update();
+		}
+		for (Ship ship : ships) {
+			ship.update();
 		}
 	}
 	
 	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
-		for (int i = 0; i < clouds.size(); i++) {
-			clouds.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		for (Cloud cloud : clouds) {
+			cloud.render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (Ship ship : ships) {
+			ship.render(cameraX, cameraY, screenWidth, pixels);
 		}
 	}
 	
