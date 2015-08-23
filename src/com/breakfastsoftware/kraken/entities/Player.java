@@ -1,6 +1,7 @@
 package com.breakfastsoftware.kraken.entities;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.core.Entity;
@@ -10,17 +11,22 @@ import com.breakfastsoftware.kraken.util.Calculations;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class Player extends Entity {
-
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
 	private int jabTimer = 0, jabTime = 7;
+
+	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
 
 	public Player(int x, int y, Camera camera) {
 		super(x, y, Sprite.PLAYERHEAD);
 		this.camera = camera;
 		w = Sprite.PLAYERHEAD.WIDTH;
 		h = Sprite.PLAYERHEAD.HEIGHT;
+
+		segments.add(new PlayerSegment(this, 1));
+		for (int i = 0; i < 7; i++)
+			segments.add(new PlayerSegment(segments.get(i)));
 	}
 
 	public void update() {
@@ -28,6 +34,8 @@ public class Player extends Entity {
 			direction = RIGHT;
 		}
 		else {
+			if (direction == RIGHT)
+				move(-w+2, 0);
 			direction = LEFT;
 		}
 		moveLogic();
@@ -47,6 +55,8 @@ public class Player extends Entity {
 				jumping = outOfWater = false;
 			}
 		}
+		for (int i = 0; i < segments.size(); i++)
+			segments.get(i).update();
 	}
 
 	public void moveLogic() {
@@ -84,8 +94,14 @@ public class Player extends Entity {
 			return;
 		}
 		super.move(dx, dy);
-		if (y < 230)
+		if (y < 230) {
 			y = 230;
+		}
 	}
 
+	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
+		for (int i = segments.size()-1; i >=0; i--)
+			segments.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		super.render(cameraX, cameraY, screenWidth, pixels);
+	}
 }

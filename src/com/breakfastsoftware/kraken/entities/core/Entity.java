@@ -13,6 +13,8 @@ public abstract class Entity {
     public Entity(int x, int y, Sprite sprite) {
         this.x = x;
         this.y = y;
+        w = sprite.WIDTH;
+        h = sprite.HEIGHT;
         this.sprite = sprite;
     }
 
@@ -100,5 +102,9 @@ public abstract class Entity {
 
     public void setDy(int dy) {
         this.dy = dy;
+    }
+
+    public int getDirection() {
+        return direction;
     }
 }

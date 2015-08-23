@@ -14,10 +14,10 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class GameState extends ImagedState {
+	
 	private Player player;
 	private EntityManager em;
     private Camera camera;
-
     private Images backgroundImage = Images.BACKGROUND;
     private boolean lenky = false;
     private int fishTimer= 60 * 15;
@@ -71,6 +71,7 @@ public class GameState extends ImagedState {
         else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
             lenky = false;
         }
+        Kraken.getKeyboard().setKeyDown(0);
     }
 
     public void render(Graphics2D g) {
