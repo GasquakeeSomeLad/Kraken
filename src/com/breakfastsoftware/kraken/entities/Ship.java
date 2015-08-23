@@ -7,7 +7,8 @@ import com.breakfastsoftware.kraken.res.Sprite;
  * Created by SomeLad on 8/22/2015.
  */
 public class Ship extends Entity {
-    boolean move = false;
+    protected boolean move = false;
+    protected int moveVal = 1;
 
     public Ship(int x) {
         super(x, 210, Sprite.FRIGATE1);
@@ -20,6 +21,15 @@ public class Ship extends Entity {
     public void update() {
         move = !move;
         if (move)
-            x++;
+            x+= moveVal;
+
+        if (x < -500) {
+            direction = RIGHT;
+            moveVal = 1;
+        }
+        else if (x > 2900) {
+            direction = LEFT;
+            moveVal = -1;
+        }
     }
 }
