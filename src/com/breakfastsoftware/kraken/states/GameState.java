@@ -31,10 +31,10 @@ public class GameState extends ImagedState {
         em.addCloud(new Cloud(522, 13));
         em.addCloud(new Cloud(1101, 8));
 
-        em.addShip(new Ship(70));
-        em.addShip(new Ship(-20));
-        em.addShip(new Ship(-110));
-        em.addShip(new Ship(-200));
+        em.addShip(new Ship(70, player, em));
+        em.addShip(new Ship(-20, player, em));
+        em.addShip(new Ship(-110, player, em));
+        em.addShip(new Ship(-200, player, em));
     }
 
     public void update() {
@@ -75,8 +75,8 @@ public class GameState extends ImagedState {
                 pixels[i+j*width] = backgroundImage.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
             }
         }
-        player.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
+        player.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         super.render(g);
     }
 

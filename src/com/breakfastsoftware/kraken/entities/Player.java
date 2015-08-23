@@ -13,6 +13,7 @@ public class Player extends Entity {
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
+	private int jabTimer = 0, jabTime = 7;
 
 	public Player(int x, int y, Camera camera) {
 		super(x, y, Sprite.PLAYERHEAD);
@@ -56,6 +57,15 @@ public class Player extends Entity {
 				move((int)(3 * Math.cos(angle)), (int)(3 * Math.sin(angle)));
 			} else {
 				move((int)(5 * Math.cos(angle)), (int)(5 * Math.sin(angle)));
+			}
+			if (--jabTime >= 0 || (--jabTimer < 0 && Kraken.getMouse().left())) {
+				jabTimer = 70;
+				if (jabTime < 0)
+					jabTime = 7;
+				if (direction == LEFT)
+					move(-10, 0);
+				if (direction == RIGHT)
+					move(10, 0);
 			}
 		}
 	}
