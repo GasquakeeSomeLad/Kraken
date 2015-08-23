@@ -46,8 +46,8 @@ public class GameState extends ImagedState {
             fishTimer = 60*15;
         }
         em.update();
-        camera.setX(player.getX() - 120);
-        camera.setY(player.getY() - 120);
+        camera.setX(player.getCameraX() - Kraken.getGameWidth()/4);
+        camera.setY(player.getCameraY() - Kraken.getGameHeight()/4);
         if (camera.getX() <= 0) {
         	camera.setX(0);
         }

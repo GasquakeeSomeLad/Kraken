@@ -17,6 +17,7 @@ public class Player extends Entity {
 	private int jabTimer = 0, jabTime = 7;
 
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
+	private int cameraX;
 
 	public Player(int x, int y, Camera camera) {
 		super(x, y, Sprite.PLAYERHEAD);
@@ -30,16 +31,6 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		if (Kraken.getMouse().getX()/2 > x+w/2-camera.getX()) {
-			if (direction == LEFT)
-				move(w-3, 0);
-			direction = RIGHT;
-		}
-		else {
-			if (direction == RIGHT)
-				move(-w+3, 0);
-			direction = LEFT;
-		}
 		moveLogic();
 
 		if (y < 300 && !jumping) {
@@ -97,7 +88,18 @@ public class Player extends Entity {
 				super.move(0, dy);
 			return;
 		}
+
+		if (x == 0);
+		else if (dx < 0 && direction == RIGHT) {
+			direction = LEFT;
+			super.move(-w + 3, 0);
+		}
+		else if (dx > 0 && direction == LEFT) {
+			direction = RIGHT;
+			super.move(w - 3, 0);
+		}
 		super.move(dx, dy);
+
 		if (y < 230) {
 			y = 230;
 		}
@@ -107,5 +109,13 @@ public class Player extends Entity {
 		for (int i = segments.size()-1; i >=0; i--)
 			segments.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		super.render(cameraX, cameraY, screenWidth, pixels);
+	}
+
+	public int getCameraX() {
+		return segments.get(segments.size()/2).getX();
+	}
+
+	public int getCameraY() {
+		return segments.get(segments.size()/2).getY();
 	}
 }
