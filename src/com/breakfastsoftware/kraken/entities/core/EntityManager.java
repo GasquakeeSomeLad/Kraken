@@ -45,8 +45,9 @@ public class EntityManager {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
-		if (fish != null)
+		if (fish != null) {
 			fish.render(cameraX, cameraY, screenWidth, pixels);
+		}
 	}
 
 	public void addBullet(Bullet bullet) {
