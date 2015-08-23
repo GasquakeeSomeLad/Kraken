@@ -1,6 +1,5 @@
-package com.breakfastsoftware.kraken.res;
+package com.breakfastsoftware.kraken.res.visuals;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 

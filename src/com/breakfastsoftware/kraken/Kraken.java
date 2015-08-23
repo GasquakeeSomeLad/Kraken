@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import com.breakfastsoftware.kraken.input.Keyboard;
 import com.breakfastsoftware.kraken.input.Mouse;
+import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.states.LogoState;
 import com.breakfastsoftware.kraken.states.core.StateManager;
 
@@ -97,6 +98,7 @@ public class Kraken extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args) {
+		Sound.START.play();
 		JFrame frame = new JFrame(title);
 		Kraken kraken = new Kraken();
 		frame.setSize(width, height);

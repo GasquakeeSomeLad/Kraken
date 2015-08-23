@@ -1,18 +1,17 @@
-package com.breakfastsoftware.kraken.res;
+package com.breakfastsoftware.kraken.res.visuals;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 /**
  * Created by SomeLad on 8/21/2015.
  */
 public enum Images {
-    BACKGROUND("/com/breakfastsoftware/kraken/res/background.png"),
-    CLOUD("/com/breakfastsoftware/kraken/res/cloud.png"),
-    ENTITIES("/com/breakfastsoftware/kraken/res/entities.png"),
-    LENKY("/com/breakfastsoftware/kraken/res/lenky.png"),
-    LOGO("/com/breakfastsoftware/kraken/res/breakfast.png"),
-    MENU("/com/breakfastsoftware/kraken/res/menu.png");
+    BACKGROUND("/com/breakfastsoftware/kraken/res/visuals/background.png"),
+    CLOUD("/com/breakfastsoftware/kraken/res/visuals/cloud.png"),
+    ENTITIES("/com/breakfastsoftware/kraken/res/visuals/entities.png"),
+    LENKY("/com/breakfastsoftware/kraken/res/visuals/lenky.png"),
+    LOGO("/com/breakfastsoftware/kraken/res/visuals/breakfast.png"),
+    MENU("/com/breakfastsoftware/kraken/res/visuals/menu.png");
 
     protected BufferedImage image;
     protected int[] pixels;

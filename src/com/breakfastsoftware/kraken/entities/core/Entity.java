@@ -1,8 +1,6 @@
 package com.breakfastsoftware.kraken.entities.core;
 
-import com.breakfastsoftware.kraken.res.Sprite;
-
-import java.awt.Graphics2D;
+import com.breakfastsoftware.kraken.res.visuals.Sprite;
 
 public abstract class Entity {
     public static final int RIGHT = 0, LEFT = 1;

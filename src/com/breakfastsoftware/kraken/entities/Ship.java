@@ -2,7 +2,7 @@ package com.breakfastsoftware.kraken.entities;
 
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
-import com.breakfastsoftware.kraken.res.Sprite;
+import com.breakfastsoftware.kraken.res.visuals.Sprite;
 import com.breakfastsoftware.kraken.util.Calculations;
 
 public class Ship extends Entity {
@@ -31,7 +31,7 @@ public class Ship extends Entity {
         if (x < -200) {
             direction = RIGHT;
             moveVal = 1;
-        } else if (x > 2600) {
+        } else if (x > 1750) {
             direction = LEFT;
             moveVal = -1;
         }

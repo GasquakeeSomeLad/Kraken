@@ -4,7 +4,8 @@ import java.awt.event.KeyEvent;
 
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.core.Entity;
-import com.breakfastsoftware.kraken.res.Sprite;
+import com.breakfastsoftware.kraken.res.audio.Sound;
+import com.breakfastsoftware.kraken.res.visuals.Sprite;
 import com.breakfastsoftware.kraken.util.Calculations;
 import com.breakfastsoftware.kraken.util.Camera;
 
@@ -59,13 +60,19 @@ public class Player extends Entity {
 				move((int)(5 * Math.cos(angle)), (int)(5 * Math.sin(angle)));
 			}
 			if (--jabTime >= 0 || (--jabTimer < 0 && Kraken.getMouse().left())) {
+				if (jabTimer < 0) {
+					Sound.JAB.play();
+				}
 				jabTimer = 70;
-				if (jabTime < 0)
+				if (jabTime < 0) {
 					jabTime = 7;
-				if (direction == LEFT)
+				}
+				if (direction == LEFT) {
 					move(-10, 0);
-				if (direction == RIGHT)
+				}
+				if (direction == RIGHT) {
 					move(10, 0);
+				}
 			}
 		}
 	}

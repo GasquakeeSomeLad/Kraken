@@ -1,6 +1,4 @@
-package com.breakfastsoftware.kraken.res;
-
-import java.awt.image.BufferedImage;
+package com.breakfastsoftware.kraken.res.visuals;
 
 public class SpriteSheet {
 	public static final SpriteSheet TESTING = new SpriteSheet(Images.CLOUD),

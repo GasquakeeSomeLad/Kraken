@@ -1,4 +1,4 @@
-package com.breakfastsoftware.kraken.res;
+package com.breakfastsoftware.kraken.res.visuals;
 
 /**
  * Created by SomeLad on 8/21/2015.

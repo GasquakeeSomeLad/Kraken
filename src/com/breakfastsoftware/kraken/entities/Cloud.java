@@ -1,8 +1,8 @@
 package com.breakfastsoftware.kraken.entities;
 
 import com.breakfastsoftware.kraken.entities.core.Entity;
-import com.breakfastsoftware.kraken.res.Images;
-import com.breakfastsoftware.kraken.res.Sprite;
+import com.breakfastsoftware.kraken.res.visuals.Images;
+import com.breakfastsoftware.kraken.res.visuals.Sprite;
 
 /**
  * Created by SomeLad on 8/22/2015.

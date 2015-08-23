@@ -9,7 +9,7 @@ import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
-import com.breakfastsoftware.kraken.res.Images;
+import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
 
