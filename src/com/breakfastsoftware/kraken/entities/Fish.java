@@ -1,6 +1,5 @@
 package com.breakfastsoftware.kraken.entities;
 
-import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
 import com.breakfastsoftware.kraken.res.Images;
@@ -12,7 +11,7 @@ import com.breakfastsoftware.kraken.util.Calculations;
  */
 public class Fish extends Entity {
     protected int counter = 60*30;
-    Player player;
+    protected Player player;
     protected EntityManager em;
 
     public Fish(EntityManager em, Player player) {
