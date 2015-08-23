@@ -23,10 +23,12 @@ public class Fish extends Entity {
 
     @Override
     public void update() {
-        if (--counter < 0)
+        if (--counter < 0) {
             em.setFish(null);
+        }
         else if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(),
-                x, y, sprite.HEIGHT, sprite.HEIGHT))
+                x, y, sprite.HEIGHT, sprite.HEIGHT)) {
             em.setFish(null);
+        }
     }
 }

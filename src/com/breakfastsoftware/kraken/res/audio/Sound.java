@@ -10,6 +10,7 @@ import java.util.Random;
  */
 public enum Sound {
     CANON("Explosion", 9),
+    FISH("Fish", 3),
     JAB("Jab", 4),
     START("Start", 1);
 
@@ -19,10 +20,6 @@ public enum Sound {
     private Clip[] clips;
 
     private Sound(String name, int amount) {
-        if (this.ordinal() == 0) {
-            System.out.println("\nSounds Loading...");
-        }
-
         this.amount = amount;
         clips = new Clip[amount];
 
