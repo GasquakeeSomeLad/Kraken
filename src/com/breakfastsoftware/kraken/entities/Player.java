@@ -11,8 +11,8 @@ import com.breakfastsoftware.kraken.util.Camera;
 public class Player extends Entity {
 
 	private Camera camera;
-	private boolean jumping = false;
-	private int jumpTime = 16;
+	private boolean jumping = false, outOfWater = false;
+	private int jumpTime = 16, jumpCounter = 30;
 
 	public Player(int x, int y, Camera camera) {
 		super(x, y, Sprite.PLAYERHEAD);
@@ -22,7 +22,6 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		int startY = y;
 		if (Kraken.getMouse().getX()/2 > x+w/2-camera.getX()) {
 			direction = RIGHT;
 		}
@@ -32,14 +31,18 @@ public class Player extends Entity {
 		moveLogic();
 
 		if (y < 300 && !jumping) {
-			if (Kraken.getKeyboard().keyDown(KeyEvent.VK_Z) || Kraken.getKeyboard().keyDown(KeyEvent.VK_SPACE))
+			if (--jumpCounter < 0 && (Kraken.getKeyboard().keyDown(KeyEvent.VK_Z)
+					|| Kraken.getKeyboard().keyDown(KeyEvent.VK_SPACE)))
 				jumping = true;
 		}
 		if (jumping) {
 			move(400, -jumpTime--);
-			if (y > 230) {
+			if (y < 220)
+				outOfWater = true;
+			else if (y > 230 && outOfWater) {
 				jumpTime = 16;
-				jumping = false;
+				jumpCounter = 30;
+				jumping = outOfWater = false;
 			}
 		}
 	}
