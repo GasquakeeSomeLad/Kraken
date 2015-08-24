@@ -12,38 +12,36 @@ public class PlayerSegment extends Entity {
     protected Entity parent;
 
     public PlayerSegment(Entity parent, Sprite sprite) {
-        super(parent.getX()-sprite.WIDTH, parent.getY()+2, sprite);
+        super(parent.getX()-sprite.WIDTH, parent.getSegmentY()+2, sprite);
         this.parent = parent;
     }
 
     public PlayerSegment(Entity parent, int difference, Sprite sprite) {
-        super(parent.getX()-sprite.WIDTH, parent.getY()+2, sprite);
+        super(parent.getX()-sprite.WIDTH, parent.getSegmentY()+2, sprite);
         this.parent = parent;
         this.difference = difference;
     }
 
     @Override
     public void update() {
-        if (parent.getY() > y+1) {
-            y = parent.getY()-1+difference;
+        if (parent.getSegmentY() > y + 1) {
+            y = parent.getSegmentY() - 1 + difference;
             if (h < 10) {
                 y--;
             }
-        }
-        else if (parent.getY() < y-1-difference) {
-            y = parent.getY()+1;
+        } else if (parent.getSegmentY() < y - 1 - difference) {
+            y = parent.getSegmentY() + 1;
             if (h < 10) {
                 y += 2;
             }
         }
-        if (Calculations.collision(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight(), x, y, w, h));
-        else if (parent.getX()-w > x) {
+        if (Calculations.collision(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight(), x, y, w, h)) ;
+        else if (parent.getX() - w > x) {
             direction = RIGHT;
-            x = parent.getX()-w;
-        }
-        else if (parent.getX() < x) {
+            x = parent.getX() - w;
+        } else if (parent.getX() < x) {
             direction = LEFT;
-            x = parent.getX()+parent.getWidth();
+            x = parent.getX() + parent.getWidth();
         }
     }
 }

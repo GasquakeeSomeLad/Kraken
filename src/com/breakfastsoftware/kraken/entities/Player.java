@@ -40,6 +40,7 @@ public class Player extends Entity {
 	}
 
 	public void update() {
+		headLogic();
 		moveLogic();
 		if (y < 300 && !jumping) {
 			if (--jumpCounter < 0 && (Kraken.getKeyboard().keyDown(KeyEvent.VK_Z)
@@ -66,7 +67,17 @@ public class Player extends Entity {
 		}
 	}
 
-	public void moveLogic() {
+	protected void headLogic() {
+		if (Kraken.getMouse().getY()/2-20 > y-camera.getY()) {
+			sprite = Sprite.PLAYERHEADDOWN;
+		} else if (Kraken.getMouse().getY()/2+20 < y-camera.getY()) {
+			sprite = Sprite.PLAYERHEADUP;
+		} else {
+			sprite = Sprite.PLAYERHEAD;
+		}
+	}
+
+	protected void moveLogic() {
 		if (!Calculations.collision(x-camera.getX(), y-camera.getY(), w, h, Kraken.getMouse().getX()/2, Kraken.getMouse().getY()/2, 1, 1)) {
 			int diffX = Kraken.getMouse().getX()/2 - x + camera.getX();
 			int diffY = Kraken.getMouse().getY()/2 - y + camera.getY();
@@ -141,5 +152,12 @@ public class Player extends Entity {
 	public void setPlayerHP(int playerHP) {
 		this.playerHP = playerHP;
 	}
-	
+
+	public int getSegmentY() {
+		if (sprite == Sprite.PLAYERHEADUP) {
+			return y+3;
+		}
+		return y;
+	}
+
 }

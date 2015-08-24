@@ -109,4 +109,8 @@ public abstract class Entity {
     public int getDirection() {
         return direction;
     }
+
+    public int getSegmentY() {
+        return y;
+    }
 }

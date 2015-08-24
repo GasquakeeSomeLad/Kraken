@@ -7,6 +7,8 @@ public class Sprite {
     public static final Sprite CLOUD1 = new Sprite(SpriteSheet.ENTITIES, 64, 64, 64, 32),
     CLOUD2 = new Sprite(SpriteSheet.ENTITIES, 64, 96, 64, 32),
     PLAYERHEAD = new Sprite(SpriteSheet.ENTITIES, 1, 5, 22, 22),
+    PLAYERHEADDOWN = new Sprite(SpriteSheet.ENTITIES, 157, 63, 22, 24),
+    PLAYERHEADUP = new Sprite(SpriteSheet.ENTITIES, 136, 96, 22, 22),
     PLAYERSEGMENT1 = new Sprite(SpriteSheet.ENTITIES, 23, 7, 5, 10),
     PLAYERSEGMENT2 = new Sprite(SpriteSheet.ENTITIES, 28, 7, 4, 10),
     PLAYERLEGS = new Sprite(SpriteSheet.ENTITIES, 32, 7, 9, 8),
