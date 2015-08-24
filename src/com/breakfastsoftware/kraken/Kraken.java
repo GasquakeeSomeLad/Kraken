@@ -60,7 +60,7 @@ public class Kraken extends Canvas implements Runnable {
 		long nextTime = System.nanoTime(), counter = nextTime,
 				delta = 1000000000/60, delta5 = delta*5;
 
-		while (true) {
+		while (running) {
 			long currentTime = System.nanoTime();
 			if (currentTime - nextTime >= delta5)
 				nextTime = currentTime;
