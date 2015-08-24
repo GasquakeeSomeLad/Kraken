@@ -12,8 +12,8 @@ public class Bullet extends Entity {
 	private int timer;
 	private int initX, initY;
 	
-	public Bullet(int x, int y, Player player, EntityManager em) {
-		super(x, y, Sprite.BULLET);
+	public Bullet(int x, int y, Player player, EntityManager em, boolean canon) {
+		super(x, y, (canon) ? Sprite.BULLET : Sprite.MISSILE);
 		this.em = em;
 		int diffX = player.getX() + player.getWidth() / 2 - x;
 		int diffY = player.getY() + player.getHeight() / 2 - y;

@@ -2,19 +2,25 @@ package com.breakfastsoftware.kraken.entities;
 
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
+import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.res.visuals.Sprite;
 import com.breakfastsoftware.kraken.util.Calculations;
+
+/**
+ * Created by Gasquakee on 8/23/2015.
+ */
 
 public class Submarine extends Entity {
 
 	private Player player;
 	private EntityManager em;
-	private boolean inWater, pursuePlayerX;
 	private String retreat = "NO";
+	private boolean inWater, pursuePlayerX;
 	private int bulletTime = 60;
-	
+
 	public Submarine(Player player, EntityManager em) {
-		super(600, 600, Sprite.FRIGATE1);
+		super((int)(Math.random() * Images.BACKGROUND.getImage().getWidth()),
+				(int)(Math.random() * ((Images.BACKGROUND.getImage().getHeight()-400)))+400, Sprite.SUBMARINE);
 		this.player = player;
 		this.em = em;
 	}
@@ -23,10 +29,10 @@ public class Submarine extends Entity {
 		if (Calculations.getDistanceX(x, player.getX()) < 120 && Calculations.getDistanceY(y, player.getY()) < 100) {
 			pursuePlayerX = false;
 			bulletTime--;
-        	if (bulletTime <= 0) {
-        		em.addBullet(new Bullet(x + 30, y + 30, player, em));
-        		bulletTime = 60;
-        	}
+			if (bulletTime <= 0) {
+				em.addBullet(new Bullet(x + 30, y + 30, player, em, false));
+				bulletTime = 60;
+			}
 		} else {
 			pursuePlayerX = true;
 			retreat = "NO";
@@ -62,17 +68,29 @@ public class Submarine extends Entity {
 			}
 		}
 		if (retreat == "LEFT") {
-			move(-2, dy);
+			dx = -4;
 			direction = LEFT;
 		} else if (retreat == "RIGHT") {
-			move(2, dy);
+			dx = 4;
 			direction = RIGHT;
 		} else if (retreat == "NO") {
+			dx = 0;
+			dy = 0;
 			if (player.getX() > x) {
 				direction = RIGHT;
 			} else {
 				direction = LEFT;
 			}
+		}
+		if (x < -100) {
+			pursuePlayerX = true;
+			retreat = "NO";
+			dx = 0; dy = 0;
+		}
+		if (x > 1700) {
+			pursuePlayerX = true;
+			retreat = "NO";
+			dx = 0; dy = 0;
 		}
 		move(dx, dy);
 	}

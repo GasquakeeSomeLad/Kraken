@@ -14,7 +14,9 @@ public class Sprite {
     PLAYERTAIL = new Sprite(SpriteSheet.ENTITIES, 50, 11, 9, 4),
     FRIGATE1 = new Sprite(SpriteSheet.ENTITIES, 0, 64, 64, 32),
     FRIGATE2 = new Sprite(SpriteSheet.ENTITIES, 0, 96, 64, 32),
+    SUBMARINE = new Sprite(SpriteSheet.ENTITIES, 61, 2, 66, 24),
     BULLET = new Sprite(SpriteSheet.ENTITIES, 121, 36, 3, 3),
+    MISSILE= new Sprite(SpriteSheet.ENTITIES, 119, 40, 9, 3),
     FISH = new Sprite(SpriteSheet.ENTITIES, 96, 32, 21, 13);
 
     public final int WIDTH, HEIGHT, PIXELS[];

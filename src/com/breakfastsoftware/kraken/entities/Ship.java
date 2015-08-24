@@ -38,7 +38,7 @@ public class Ship extends Entity {
         if (Calculations.getDistanceX(player.getX(), x) < 200 && Calculations.getDistanceY(player.getY(), y) < 150) {
         	bulletTime--;
         	if (bulletTime <= 0) {
-        		em.addBullet(new Bullet(x + 30, y + 30, player, em));
+        		em.addBullet(new Bullet(x + 30, y + 30, player, em, true));
         		bulletTime = 50;
         	}
         }
