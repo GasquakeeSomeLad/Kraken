@@ -11,7 +11,7 @@ public class Cloud extends Entity {
     protected int counter = 5;
 
     public Cloud(int x, int y) {
-        super(x, y, Sprite.CLOUD);
+        super(x, y, (Math.random() > .5) ? Sprite.CLOUD1 : Sprite.CLOUD2);
     }
 
     @Override

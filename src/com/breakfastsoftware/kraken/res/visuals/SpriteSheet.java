@@ -1,8 +1,7 @@
 package com.breakfastsoftware.kraken.res.visuals;
 
 public class SpriteSheet {
-	public static final SpriteSheet TESTING = new SpriteSheet(Images.CLOUD),
-	ENTITIES = new SpriteSheet(Images.ENTITIES);
+	public static final SpriteSheet ENTITIES = new SpriteSheet(Images.ENTITIES);
 
 	private Images image;
 	

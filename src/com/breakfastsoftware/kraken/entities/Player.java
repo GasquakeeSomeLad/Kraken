@@ -100,9 +100,8 @@ public class Player extends Entity {
 		if (dy == 1 || dy == -1) {
 			dy = 0;
 		}
-
 		if (Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
-			super.move(0, dy);
+			dx = 0;
 		}
 		else if (dx < 0 && direction == RIGHT) {
 			direction = LEFT;
@@ -112,10 +111,7 @@ public class Player extends Entity {
 			direction = RIGHT;
 			super.move(w - 3, 0);
 		}
-
-		if (!Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
-			super.move(dx, dy);
-		}
+		super.move(dx, dy);
 
 		if (y < 230) {
 			y = 230;
