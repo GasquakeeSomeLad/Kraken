@@ -14,7 +14,7 @@ import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.Submarine;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
-import com.breakfastsoftware.kraken.res.audio.Sound;
+import com.breakfastsoftware.kraken.res.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
@@ -26,11 +26,12 @@ public class GameState extends ImagedState {
 	private EntityManager em;
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
-    private int fishTimer = 60 * 15, round = 0;
-    private float submarines = 0.55f, ships = 1.6f, blimps = 0.8f;
+    private int fishTimer = 60 * 15, round = 0, roundTime = 252;
+    private boolean roundIndicator;
+    private float submarines = 0.55f, ships = 1.6f, blimps = 0.45f;
     private int[] alphaPixels;
     private BufferedImage alphaImage;
-    private Font font = CustomFont.BLACK.getFont(true, false, 20f);
+    private Font font = CustomFont.BLACK.getFont(true, false, 20f), font2 = CustomFont.BLACK.getFont(true, false, 32f);
 
     public GameState() {
         super(2);
@@ -88,10 +89,11 @@ public class GameState extends ImagedState {
     }
 
     private void newRound() {
+    	roundIndicator = true;
         player.setPlayerHP(100);
         submarines*= 1.25f;
         ships*= 1.4f;
-        blimps*=1.06f;
+        blimps*=1.15f;
         if (++round == 1) {
             em.addShip(new Ship(-130, player, em));
             return;
@@ -150,6 +152,16 @@ public class GameState extends ImagedState {
         g.fillRect(13, 531, 100*scale, 29);
         g.setColor(new Color(128, 0, 0, 150));
         g.fillRect(13, 531, player.getPlayerHP() * scale, 29);
+        if (roundIndicator) {
+        	roundTime -= 2;
+        	g.setFont(font2);
+            g.setColor(new Color(10, 180, 120, roundTime));
+        	g.drawString("Round: " + round, 335, 200+roundTime/3);
+        	if (roundTime <= 0) {
+        		roundTime = 252;
+        		roundIndicator = false;
+        	}
+        }
     }
 
     public int getX() {

@@ -6,19 +6,19 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import com.breakfastsoftware.kraken.Kraken;
-import com.breakfastsoftware.kraken.res.audio.Sound;
+import com.breakfastsoftware.kraken.res.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 
 public class HelpState extends ImagedState {
+	
 	private Font font;
 	
 	public HelpState() {
 		super(1);
 		image = Images.MENU.getImage();
         font = CustomFont.BLACK.getFont(false, true, 40);
-
 		Kraken.getKeyboard().releaseKey(KeyEvent.VK_ENTER);
 	}
 
@@ -38,8 +38,11 @@ public class HelpState extends ImagedState {
 		g.drawString("Attack: Left Click,", 40, 140);
 		g.drawString("Jab: Right Click,", 40, 190);
 		g.drawString("Jump: Space,", 40, 240);
-		g.drawString("Objective:", 15, 305);
-		g.drawString("Survive as many rounds of boats as possible.", 40, 355);
+		g.drawString("Turn music off: M,", 40, 290);
+		g.drawString("Fancy Water: F", 40, 340);
+		g.drawString("Objective:", 15, 400);
+		g.drawString("Survive as many rounds of boats, blimps, ", 40, 445);
+		g.drawString("and submarines as possible.", 40, 490);
 		g.drawString("(Enter)", 674, 558);
 	}
 
