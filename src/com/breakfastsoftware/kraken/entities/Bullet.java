@@ -34,14 +34,16 @@ public class Bullet extends Entity {
 			em.removeBullet(this);
 		}
 		if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
-			player.setPlayerHP(player.getPlayerHP()-2);
+			player.setPlayerHP(player.getPlayerHP()-5);
+			Sound.DAMAGE.play();
 			em.removeBullet(this);
 			return;
 		}
 		for (int i = 0; i < player.segments.size(); i++) {
 			PlayerSegment segment = player.segments.get(i);
 			if (Calculations.collision(segment.getX(), segment.getY(), segment.getWidth(), segment.getHeight(), x, y, w, h)) {
-				player.setPlayerHP(player.getPlayerHP()-1);
+				player.setPlayerHP(player.getPlayerHP()-2);
+				Sound.DAMAGE.play();
 				em.removeBullet(this);
 				return;
 			}

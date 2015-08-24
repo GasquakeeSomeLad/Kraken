@@ -2,6 +2,7 @@ package com.breakfastsoftware.kraken.entities;
 
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
+import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.res.visuals.Sprite;
 import com.breakfastsoftware.kraken.util.Calculations;
@@ -23,6 +24,7 @@ public class Submarine extends Entity {
 
 	public void update() {
 		if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
+			Sound.DESTROY.play();
 			em.removeSubmarine(this);
 			return;
 		}

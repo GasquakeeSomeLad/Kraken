@@ -10,6 +10,8 @@ import java.util.Random;
  */
 public enum Sound {
     CANON("Explosion", 9),
+    DAMAGE("Damage", 4),
+    DESTROY("Destroy", 5),
     FISH("Fish", 3),
     JAB("Jab", 4),
     JUMP("Jump", 1),

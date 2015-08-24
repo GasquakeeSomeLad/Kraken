@@ -24,7 +24,7 @@ public class GameState extends ImagedState {
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
     private int fishTimer = 60 * 15, round = 0;
-    private float submarines = 0.55f, ships = 1.5f;
+    private float submarines = 0.55f, ships = 1.6f;
 
     private int[] alphaPixels;
     private BufferedImage alphaImage;
