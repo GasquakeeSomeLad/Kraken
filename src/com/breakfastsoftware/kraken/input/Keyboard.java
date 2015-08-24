@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class Keyboard implements KeyListener {
+	
 	private ArrayList<Integer> keys = new ArrayList<Integer>();
 	
 	public void keyPressed(KeyEvent e) {

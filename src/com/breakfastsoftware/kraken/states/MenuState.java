@@ -33,8 +33,10 @@ public class MenuState extends ImagedState {
     
     public void update() {
     	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_DOWN)
-				&& Kraken.getKeyboard().keyUp(KeyEvent.VK_UP)) {
+				&& Kraken.getKeyboard().keyUp(KeyEvent.VK_UP) || Kraken.getKeyboard().keyDown(KeyEvent.VK_S)
+				&& Kraken.getKeyboard().keyUp(KeyEvent.VK_W)) {
 			Kraken.getKeyboard().releaseKey(KeyEvent.VK_DOWN);
+			Kraken.getKeyboard().releaseKey(KeyEvent.VK_S);
 			Sound.MOVE.play();
     		if (optionPicked < 3) {
     			optionPicked++;
@@ -45,9 +47,9 @@ public class MenuState extends ImagedState {
     	       	optionColors[i] = new Color(255, 255, 255, 230);
     		}
     		optionColors[optionPicked] = new Color(0, 0, 0, 230);
-    	}
-    	else if (Kraken.getKeyboard().keyDown(KeyEvent.VK_UP)) {
+    	} else if (Kraken.getKeyboard().keyDown(KeyEvent.VK_UP) || Kraken.getKeyboard().keyDown(KeyEvent.VK_W)) {
 			Kraken.getKeyboard().releaseKey(KeyEvent.VK_UP);
+			Kraken.getKeyboard().releaseKey(KeyEvent.VK_W);
 			Sound.MOVE.play();
     		if (optionPicked > 0) {
     			optionPicked--;

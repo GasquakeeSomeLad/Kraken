@@ -2,12 +2,19 @@ package com.breakfastsoftware.kraken.entities.core;
 
 import java.util.ArrayList;
 
-import com.breakfastsoftware.kraken.entities.*;
+import com.breakfastsoftware.kraken.entities.Blimp;
+import com.breakfastsoftware.kraken.entities.Bullet;
+import com.breakfastsoftware.kraken.entities.Cloud;
+import com.breakfastsoftware.kraken.entities.DeathEmote;
+import com.breakfastsoftware.kraken.entities.Fish;
+import com.breakfastsoftware.kraken.entities.Ship;
+import com.breakfastsoftware.kraken.entities.Submarine;
 
 public class EntityManager {
 
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Ship> ships;
+	private ArrayList<Blimp> blimps;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Submarine> submarines;
 	private ArrayList<DeathEmote> emotes;
@@ -19,6 +26,7 @@ public class EntityManager {
 		ships = new ArrayList<Ship>();
 		bullets = new ArrayList<Bullet>();
 		submarines = new ArrayList<Submarine>();
+		blimps = new ArrayList<Blimp>();
 		emotes = new ArrayList<DeathEmote>();
 		dead = new ArrayList<Entity>();
 	}
@@ -32,6 +40,9 @@ public class EntityManager {
 		}
 		for (int i = 0; i < bullets.size(); i ++) {
 			bullets.get(i).update();
+		}
+		for (int i = 0; i < blimps.size(); i ++) {
+			blimps.get(i).update();
 		}
 		for (int i = 0; i < submarines.size(); i ++) {
 			submarines.get(i).update();
@@ -60,6 +71,9 @@ public class EntityManager {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
+		for (int i = 0; i < blimps.size(); i ++) {
+			blimps.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
 		for (int i = 0; i < submarines.size(); i++) {
 			submarines.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
@@ -87,6 +101,9 @@ public class EntityManager {
 		for (int i = 0; i < submarines.size(); i++) {
 			submarines.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
+		for (int i = 0; i < blimps.size(); i++) {
+			blimps.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
 		if (fish != null) {
 			fish.render(cameraX, cameraY, screenWidth, pixels);
 		}
@@ -104,6 +121,15 @@ public class EntityManager {
 
 	public void removeBullet(Bullet bullet) {
 		bullets.remove(bullet);
+	}
+
+	public void addBlimp(Blimp blimp) {
+		blimps.add(blimp);
+	}
+
+	public void removeBlimp(Blimp blimp) {
+		blimps.remove(blimp);
+		dead.add(blimp);
 	}
 
 	public void addSubmarine(Submarine submarine) {
@@ -139,7 +165,7 @@ public class EntityManager {
 	}
 
 	public int getEnemyCount() {
-		return ships.size()+submarines.size();
+		return ships.size()+submarines.size()+blimps.size();
 	}
 
 	public void removeEmote(DeathEmote deathEmote) {

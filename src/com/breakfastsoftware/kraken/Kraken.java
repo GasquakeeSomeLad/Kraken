@@ -4,9 +4,7 @@ import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
-
 import javax.swing.JFrame;
-
 import com.breakfastsoftware.kraken.input.Keyboard;
 import com.breakfastsoftware.kraken.input.Mouse;
 import com.breakfastsoftware.kraken.res.audio.Sound;

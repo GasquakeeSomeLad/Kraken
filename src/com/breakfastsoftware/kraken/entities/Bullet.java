@@ -13,23 +13,30 @@ public class Bullet extends Entity {
 	private float angle;
 	private int timer;
 	private int initX, initY;
+	private boolean blimp;
 
-	public Bullet(int x, int y, Player player, EntityManager em, boolean canon) {
+	public Bullet(int x, int y, Player player, EntityManager em, boolean canon, boolean blimp) {
 		super(x, y, (canon) ? Sprite.BULLET : Sprite.MISSILE);
 		this.em = em;
 		this.player = player;
-		initX = x;
-		initY = y;
+		this.blimp = blimp;
+		initX = x; initY = y;
 		int diffX = player.getX() + player.getWidth() / 2 - x;
 		int diffY = player.getY() + player.getHeight() / 2 - y;
 		angle = (float) Math.atan2(diffY, diffX);
+		if (blimp) {
+			dy = 7;
+			sprite = Sprite.BOMB;
+		}
 		Sound.CANON.play();
 	}
 
 	public void update() {
 		timer++;
-		x = (int) (initX + timer * 4 * Math.cos(angle));
-		y = (int) (initY + timer * 4 * Math.sin(angle));
+		if (!blimp) {
+			x = (int) (initX + timer * 4 * Math.cos(angle));
+			y = (int) (initY + timer * 4 * Math.sin(angle));
+		}
 		if (timer >= 1800) {
 			em.removeBullet(this);
 		}
@@ -48,6 +55,7 @@ public class Bullet extends Entity {
 				return;
 			}
 		}
+		move(dx, dy);
 	}
 
 }

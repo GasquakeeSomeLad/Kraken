@@ -1,11 +1,13 @@
 package com.breakfastsoftware.kraken.states;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-
 import com.breakfastsoftware.kraken.Kraken;
+import com.breakfastsoftware.kraken.entities.Blimp;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Player;
@@ -19,27 +21,24 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class GameState extends ImagedState {
+	
 	private Player player;
 	private EntityManager em;
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
     private int fishTimer = 60 * 15, round = 0;
-    private float submarines = 0.55f, ships = 1.6f;
-
+    private float submarines = 0.55f, ships = 1.6f, blimps = 0.8f;
     private int[] alphaPixels;
     private BufferedImage alphaImage;
     private Font font = CustomFont.BLACK.getFont(true, false, 20f);
 
     public GameState() {
         super(2);
-
         alphaImage = new BufferedImage(Kraken.getGameWidth() / 2, Kraken.getGameHeight() / 2, BufferedImage.TYPE_INT_ARGB);
         alphaPixels = ((DataBufferInt) alphaImage.getRaster().getDataBuffer()).getData();
-
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 250, camera);
-
         em = new EntityManager();
         em.addCloud(new Cloud(0, 24));
         em.addCloud(new Cloud(156, 20));
@@ -92,26 +91,33 @@ public class GameState extends ImagedState {
         player.setPlayerHP(100);
         submarines*= 1.25f;
         ships*= 1.4f;
-
+        blimps*=1.06f;
         if (++round == 1) {
             em.addShip(new Ship(-130, player, em));
             return;
         }
-
         Sound.NEWLEVEL.play();
-        for (int i = (int)submarines; i > 0; i--) {
+        for (int i = (int) submarines; i > 0; i--) {
             em.addSubmarine(new Submarine(player, em));
         }
-
         int left = 0, right = 0;
-        for (int i = (int)ships; i > 0; i--) {
+        for (int i = (int) ships; i > 0; i--) {
             if (Math.random() > .5) {
                 em.addShip(new Ship(-130-left, player, em));
                 left += 70;
-            }
-            else {
+            } else {
                 em.addShip(new Ship(1700+right, player, em));
                 right += 70;
+            }
+        }
+        int left2 = 0, right2 = 0;
+        for (int i = (int) blimps; i > 0; i--) {
+            if (Math.random() > .5) {
+                em.addBlimp(new Blimp(-130-left2, player, em));
+                left2 += 100;
+            } else {
+                em.addBlimp(new Blimp(1700+right2, player, em));
+                right2 += 100;
             }
         }
     }
@@ -132,7 +138,6 @@ public class GameState extends ImagedState {
         } else {
             em.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
         }
-
         player.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
         super.render(g);
         if (Kraken.fancy()) {

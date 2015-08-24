@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
@@ -19,7 +20,6 @@ public class CreditsState extends ImagedState {
         image = Images.MENU.getImage();
         font = CustomFont.BLACK.getFont(false, true, 35);
         font2 = CustomFont.BLACK.getFont(false, true, 25);
-
 		Kraken.getKeyboard().releaseKey(KeyEvent.VK_ENTER);
     }
     

@@ -4,9 +4,8 @@ import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 
-import java.awt.*;
-
 public class LogoState extends ImagedState {
+	
 	protected int counter = 110;
 
 	public LogoState() {
