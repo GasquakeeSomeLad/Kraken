@@ -22,7 +22,11 @@ public class Submarine extends Entity {
 	}
 
 	public void update() {
-		if (Calculations.getDistanceX(x, player.getX()) < 100 && Calculations.getDistanceY(y, player.getY()) < 100) {
+		if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
+			em.removeSubmarine(this);
+			return;
+		}
+		if (Calculations.getDistanceX(x, player.getX()) < 200 && Calculations.getDistanceY(y, player.getY()) < 200) {
 			pursuePlayerX = false;
 			bulletTime--;
 			if (bulletTime <= 0) {

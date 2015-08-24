@@ -36,13 +36,13 @@ public class PlayerSegment extends Entity {
                 y += 2;
             }
         }
-        if (Calculations.collision(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight(), x, y, w, h)) {
-            direction = parent.getDirection();
-        }
+        if (Calculations.collision(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight(), x, y, w, h));
         else if (parent.getX()-w > x) {
+            direction = RIGHT;
             x = parent.getX()-w;
         }
         else if (parent.getX() < x) {
+            direction = LEFT;
             x = parent.getX()+parent.getWidth();
         }
     }

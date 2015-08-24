@@ -10,20 +10,24 @@ public class Ship extends Entity {
 	protected EntityManager em;
 	protected Player player;
     protected boolean move = false;
-    protected int moveVal = 1;
+    protected int moveVal = -1;
     protected int bulletTime = 50;
 
     public Ship(int x, Player player, EntityManager em) {
-        super(x, 210, Sprite.FRIGATE1);
+        super(x, 210, (Math.random() > .5) ? Sprite.FRIGATE1 : Sprite.FRIGATE2);
         this.em = em;
         this.player = player;
-        if (Math.random() > .5) {
-            sprite = Sprite.FRIGATE2;
+        if (y < 0) {
+            moveVal = 1;
+            direction = RIGHT;
         }
-        direction = RIGHT;
     }
 
     public void update() {
+        if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
+            em.removeShip(this);
+            return;
+        }
         move = !move;
         if (move) {
         	x += moveVal;
@@ -35,7 +39,7 @@ public class Ship extends Entity {
             direction = LEFT;
             moveVal = -1;
         }
-        if (Calculations.getDistanceX(player.getX(), x) < 200 && Calculations.getDistanceY(player.getY(), y) < 150) {
+        if (x-w > 0 && x < 1600 && Calculations.getDistanceX(player.getX(), x) < 300 && Calculations.getDistanceY(player.getY(), y) < 200) {
         	bulletTime--;
         	if (bulletTime <= 0) {
         		em.addBullet(new Bullet(x + 30, y + 30, player, em, true));

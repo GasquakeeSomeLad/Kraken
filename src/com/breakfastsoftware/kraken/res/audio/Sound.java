@@ -13,6 +13,7 @@ public enum Sound {
     FISH("Fish", 3),
     JAB("Jab", 4),
     JUMP("Jump", 1),
+    NEWLEVEL("NewLevel", 1),
     START("Start", 1);
 
     private static Random generator = new Random();

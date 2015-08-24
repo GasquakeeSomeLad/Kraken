@@ -25,8 +25,8 @@ public class Fish extends Entity {
             em.setFish(null);
         } else if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(),
                 x, y, sprite.HEIGHT, sprite.HEIGHT)) {
-            if (player.getPlayerHP() <= 85) {
-                player.setPlayerHP(player.getPlayerHP()+15);
+            if (player.getPlayerHP() <= 80) {
+                player.setPlayerHP(player.getPlayerHP()+20);
                 em.setFish(null);
                 Sound.FISH.play();
             }

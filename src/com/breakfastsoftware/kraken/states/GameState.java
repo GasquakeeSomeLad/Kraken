@@ -1,7 +1,6 @@
 package com.breakfastsoftware.kraken.states;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -13,6 +12,8 @@ import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.Submarine;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
+import com.breakfastsoftware.kraken.res.audio.Sound;
+import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
@@ -22,11 +23,13 @@ public class GameState extends ImagedState {
 	private EntityManager em;
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
-    private boolean fancy = false;
-    private int fishTimer = 60 * 15;
+    private int fishTimer = 60 * 15, round = 0;
+    private float submarines = 0.55f, ships = 1.5f;
 
     private int[] alphaPixels;
     private BufferedImage alphaImage;
+    private boolean fancy = false;
+    private Font font = CustomFont.BLACK.getFont(true, false, 20f);
 
     public GameState() {
         super(2);
@@ -50,15 +53,13 @@ public class GameState extends ImagedState {
         em.addCloud(new Cloud(1248, 20));
         em.addCloud(new Cloud(1384, 43));
         em.addCloud(new Cloud(1499, 17));
-        em.addShip(new Ship(70, player, em));
-        em.addShip(new Ship(-20, player, em));
-        em.addShip(new Ship(-110, player, em));
-        em.addShip(new Ship(-200, player, em));
-        em.addSubmarine(new Submarine(player, em));
     }
 
     public void update() {
         player.update();
+        if (em.getEnemyCount() == 0) {
+            newRound();
+        }
         if (em.noFish() && --fishTimer < 0) {
             em.setFish(new Fish(em, player));
             fishTimer = 60*15;
@@ -92,6 +93,30 @@ public class GameState extends ImagedState {
         }
     }
 
+    private void newRound() {
+        if (++round != 1)
+            Sound.NEWLEVEL.play();
+        player.setPlayerHP(100);
+        submarines*= 1.25f;
+        ships*= 1.4f;
+
+        for (int i = (int)submarines; i > 0; i--) {
+            em.addSubmarine(new Submarine(player, em));
+        }
+
+        int left = 0, right = 0;
+        for (int i = (int)ships; i > 0; i--) {
+            if (Math.random() > .5) {
+                em.addShip(new Ship(-130-left, player, em));
+                left += 70;
+            }
+            else {
+                em.addShip(new Ship(1700+right, player, em));
+                right += 70;
+            }
+        }
+    }
+
     public void render(Graphics2D g) {
         int width = Kraken.getGameWidth()/scale, height = Kraken.getGameHeight()/scale,
                 imageWidth = backgroundImage.getImage().getWidth();
@@ -103,13 +128,16 @@ public class GameState extends ImagedState {
                 }
             }
         }
-        em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
-        player.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
+        em.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
+        player.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
         super.render(g);
         if (fancy) {
             g.drawImage(alphaImage, 0, 0, Kraken.getGameWidth(), Kraken.getGameHeight(), null);
         }
         g.setColor(new Color(32, 32, 32, 100));
+        g.setFont(font);
+        g.drawString("Round: " + round, 18, 496);
+        g.drawString("Foes Left: " + em.getEnemyCount(), 18, 521);
         g.fillRect(13, 531, 100*scale, 29);
         g.setColor(new Color(128, 0, 0, 150));
         g.fillRect(13, 531, player.getPlayerHP() * scale, 29);

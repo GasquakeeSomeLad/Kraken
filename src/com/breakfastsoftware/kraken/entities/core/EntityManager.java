@@ -97,4 +97,7 @@ public class EntityManager {
 		ships.remove(ship);
 	}
 
+	public int getEnemyCount() {
+		return ships.size()+submarines.size();
+	}
 }
