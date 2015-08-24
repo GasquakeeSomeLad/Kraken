@@ -12,12 +12,18 @@ public class PlayerSegment extends Entity {
     protected Entity parent;
 
     public PlayerSegment(Entity parent) {
-        super(parent.getX(), parent.getY()+2, Sprite.PLAYERSEGMENT);
+        super(parent.getX()-Sprite.PLAYERSEGMENT.WIDTH, parent.getY()+2, Sprite.PLAYERSEGMENT);
         this.parent = parent;
     }
 
     public PlayerSegment(Entity parent, int difference) {
-        super(parent.getX(), parent.getY()+2, Sprite.PLAYERSEGMENT);
+        super(parent.getX()-Sprite.PLAYERSEGMENT.WIDTH, parent.getY()+2, Sprite.PLAYERSEGMENT);
+        this.parent = parent;
+        this.difference = difference;
+    }
+
+    public PlayerSegment(Entity parent, int difference, Sprite sprite) {
+        super(parent.getX()-sprite.WIDTH, parent.getY()+2, sprite);
         this.parent = parent;
         this.difference = difference;
     }
@@ -28,7 +34,7 @@ public class PlayerSegment extends Entity {
             y = parent.getY()-1+difference;
         }
         else if (parent.getY() < y-1) {
-            y = parent.getY()+1;
+            y = parent.getY()+1+difference;
         }
         if (Calculations.collision(parent.getX(), parent.getY(), parent.getWidth(), parent.getHeight(), x, y, w, h)) {
             direction = parent.getDirection();

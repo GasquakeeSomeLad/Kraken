@@ -27,6 +27,9 @@ public class Player extends Entity {
 		segments.add(new PlayerSegment(this, 1));
 		for (int i = 0; i < 7; i++)
 			segments.add(new PlayerSegment(segments.get(i)));
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERLEGS));
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERFEET));
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERTAIL));
 	}
 
 	public void update() {
@@ -87,7 +90,10 @@ public class Player extends Entity {
 				super.move(0, dy);
 			return;
 		}
-		if (dx < 0 && direction == RIGHT) {
+		if (Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
+			super.move(0, dy);
+		}
+		else if (dx < 0 && direction == RIGHT) {
 			direction = LEFT;
 			super.move(-w + 3, 0);
 		}
@@ -95,8 +101,9 @@ public class Player extends Entity {
 			direction = RIGHT;
 			super.move(w - 3, 0);
 		}
-		super.move(dx, dy);
 
+		if (!Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1))
+			super.move(dx, dy);
 		if (y < 230) {
 			y = 230;
 		}
