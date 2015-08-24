@@ -1,5 +1,7 @@
 package com.breakfastsoftware.kraken.res.audio;
 
+import com.breakfastsoftware.kraken.Kraken;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,8 +17,9 @@ public enum Sound {
     FISH("Fish", 3),
     JAB("Jab", 4),
     JUMP("Jump", 1),
+    MOVE("Move", 1),
     NEWLEVEL("NewLevel", 1),
-    START("Start", 1);
+    START("Start", 1),;
 
     private static Random generator = new Random();
 
@@ -40,6 +43,8 @@ public enum Sound {
     }
 
     public void play() {
+        if (!Kraken.playSound())
+            return;
         int val = generator.nextInt(amount);
         clips[val].setFramePosition(0);
         clips[val].start();

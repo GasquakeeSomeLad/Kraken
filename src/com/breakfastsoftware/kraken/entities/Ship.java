@@ -10,7 +10,7 @@ public class Ship extends Entity {
 	
 	protected EntityManager em;
 	protected Player player;
-    protected boolean move = false;
+    protected boolean move = false, alive = true;
     protected int moveVal = -1;
     protected int bulletTime = 50;
 
@@ -25,9 +25,24 @@ public class Ship extends Entity {
     }
 
     public void update() {
-        if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
+        if (!alive) {
+            if (++y > 1200) {
+                em.removeDead(this);
+            }
+            return;
+        }
+        else if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
             Sound.DESTROY.play();
+            alive = false;
+            em.addEmote(new DeathEmote(x+w/2, y+h/2, em));
             em.removeShip(this);
+            move(0, h);
+            if (sprite == Sprite.FRIGATE1) {
+                sprite = Sprite.FRIGATE1DEAD;
+            }
+            else {
+                sprite = Sprite.FRIGATE2DEAD;
+            }
             return;
         }
         move = !move;

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import com.breakfastsoftware.kraken.Kraken;
+import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
@@ -31,8 +32,10 @@ public class MenuState extends ImagedState {
     }
     
     public void update() {
-    	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_DOWN)) {
+    	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_DOWN)
+				&& Kraken.getKeyboard().keyUp(KeyEvent.VK_UP)) {
 			Kraken.getKeyboard().releaseKey(KeyEvent.VK_DOWN);
+			Sound.MOVE.play();
     		if (optionPicked < 3) {
     			optionPicked++;
     		} else {
@@ -43,8 +46,9 @@ public class MenuState extends ImagedState {
     		}
     		optionColors[optionPicked] = new Color(0, 0, 0, 230);
     	}
-    	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_UP)) {
+    	else if (Kraken.getKeyboard().keyDown(KeyEvent.VK_UP)) {
 			Kraken.getKeyboard().releaseKey(KeyEvent.VK_UP);
+			Sound.MOVE.play();
     		if (optionPicked > 0) {
     			optionPicked--;
     		} else {
@@ -56,6 +60,7 @@ public class MenuState extends ImagedState {
     		optionColors[optionPicked] = new Color(0, 0, 0, 230);
     	}
     	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_ENTER)) {
+			Sound.FISH.play();
     		if (optionPicked == 0) {
     			Kraken.getStateManager().setState(new GameState());
     		} else if (optionPicked == 1) {

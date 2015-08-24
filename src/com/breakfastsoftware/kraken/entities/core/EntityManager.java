@@ -2,11 +2,7 @@ package com.breakfastsoftware.kraken.entities.core;
 
 import java.util.ArrayList;
 
-import com.breakfastsoftware.kraken.entities.Bullet;
-import com.breakfastsoftware.kraken.entities.Cloud;
-import com.breakfastsoftware.kraken.entities.Fish;
-import com.breakfastsoftware.kraken.entities.Ship;
-import com.breakfastsoftware.kraken.entities.Submarine;
+import com.breakfastsoftware.kraken.entities.*;
 
 public class EntityManager {
 
@@ -14,6 +10,8 @@ public class EntityManager {
 	private ArrayList<Ship> ships;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Submarine> submarines;
+	private ArrayList<DeathEmote> emotes;
+	private ArrayList<Entity> dead;
 	private Fish fish;
 
 	public EntityManager() {
@@ -21,6 +19,8 @@ public class EntityManager {
 		ships = new ArrayList<Ship>();
 		bullets = new ArrayList<Bullet>();
 		submarines = new ArrayList<Submarine>();
+		emotes = new ArrayList<DeathEmote>();
+		dead = new ArrayList<Entity>();
 	}
 
 	public void update() {
@@ -39,9 +39,18 @@ public class EntityManager {
 		if (fish != null) {
 			fish.update();
 		}
+		for (int i = 0; i < dead.size(); i++) {
+			dead.get(i).update();
+		}
+		for (int i = 0; i < emotes.size(); i ++) {
+			emotes.get(i).update();
+		}
 	}
 
 	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
+		for (int i = 0; i < dead.size(); i++) {
+			dead.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
 		for (int i = 0; i < clouds.size(); i++) {
 			clouds.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
@@ -56,6 +65,36 @@ public class EntityManager {
 		}
 		if (fish != null) {
 			fish.render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (int i = 0; i < dead.size(); i++) {
+			dead.get(i).update();
+		}
+		for (int i = 0; i < emotes.size(); i ++) {
+			emotes.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
+	}
+
+	public void fancyRender(int cameraX, int cameraY, int screenWidth, int[] pixels, int[] alphaPixels) {
+		for (int i = 0; i < dead.size(); i++) {
+			dead.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (int i = 0; i < ships.size(); i++) {
+			ships.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (int i = 0; i < submarines.size(); i++) {
+			submarines.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
+		if (fish != null) {
+			fish.render(cameraX, cameraY, screenWidth, pixels);
+		}
+		for (int i = 0; i < emotes.size(); i ++) {
+			emotes.get(i).render(cameraX, cameraY, screenWidth, alphaPixels);
+		}
+		for (int i = 0; i < clouds.size(); i++) {
+			clouds.get(i).render(cameraX, cameraY, screenWidth, alphaPixels);
 		}
 	}
 
@@ -73,6 +112,7 @@ public class EntityManager {
 
 	public void removeSubmarine(Submarine submarine) {
 		submarines.remove(submarine);
+		dead.add(submarine);
 	}
 
 	public void addCloud(Cloud cloud) {
@@ -95,9 +135,22 @@ public class EntityManager {
 
 	public void removeShip(Ship ship) {
 		ships.remove(ship);
+		dead.add(ship);
 	}
 
 	public int getEnemyCount() {
 		return ships.size()+submarines.size();
+	}
+
+	public void removeEmote(DeathEmote deathEmote) {
+		emotes.remove(deathEmote);
+	}
+
+	public void addEmote(DeathEmote deathEmote) {
+		emotes.add(deathEmote);
+	}
+
+	public void removeDead(Entity entity) {
+		dead.remove(entity);
 	}
 }

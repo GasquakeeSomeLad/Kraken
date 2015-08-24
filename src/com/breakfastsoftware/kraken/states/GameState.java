@@ -28,7 +28,6 @@ public class GameState extends ImagedState {
 
     private int[] alphaPixels;
     private BufferedImage alphaImage;
-    private boolean fancy = false;
     private Font font = CustomFont.BLACK.getFont(true, false, 20f);
 
     public GameState() {
@@ -87,19 +86,19 @@ public class GameState extends ImagedState {
                 backgroundImage = Images.BACKGROUND;
         	}
         }
-        if (Kraken.getKeyboard().keyDown(KeyEvent.VK_F)) {
-                Kraken.getKeyboard().releaseKey(KeyEvent.VK_F);
-            fancy = !fancy;
-        }
     }
 
     private void newRound() {
-        if (++round != 1)
-            Sound.NEWLEVEL.play();
         player.setPlayerHP(100);
         submarines*= 1.25f;
         ships*= 1.4f;
 
+        if (++round == 1) {
+            em.addShip(new Ship(-130, player, em));
+            return;
+        }
+
+        Sound.NEWLEVEL.play();
         for (int i = (int)submarines; i > 0; i--) {
             em.addSubmarine(new Submarine(player, em));
         }
@@ -123,15 +122,20 @@ public class GameState extends ImagedState {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 pixels[i+j*width] = backgroundImage.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
-                if (fancy) {
+                if (Kraken.fancy()) {
                     alphaPixels[i+j*width] = Images.ALPHABACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
                 }
             }
         }
-        em.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
+        if (Kraken.fancy()) {
+            em.fancyRender(getX(), getY(), Kraken.getGameWidth() / scale, pixels, alphaPixels);
+        } else {
+            em.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
+        }
+
         player.render(getX(), getY(), Kraken.getGameWidth() / scale, pixels);
         super.render(g);
-        if (fancy) {
+        if (Kraken.fancy()) {
             g.drawImage(alphaImage, 0, 0, Kraken.getGameWidth(), Kraken.getGameHeight(), null);
         }
         g.setColor(new Color(32, 32, 32, 100));

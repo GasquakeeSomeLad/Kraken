@@ -76,7 +76,7 @@ public class Player extends Entity {
 			} else {
 				move((int)(5 * Math.cos(angle)), (int)(5 * Math.sin(angle)));
 			}
-			if (--jabTime >= 0 || (--jabTimer < 0 && Kraken.getMouse().left())) {
+			if (--jabTime >= 0 || (--jabTimer < 0 && Kraken.getMouse().right())) {
 				if (jabTimer < 0) {
 					Sound.JAB.play();
 				}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import com.breakfastsoftware.kraken.Kraken;
+import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
@@ -24,6 +25,7 @@ public class CreditsState extends ImagedState {
     
     public void update() {
     	if (Kraken.getKeyboard().keyDown(KeyEvent.VK_ENTER)) {
+			Sound.FISH.play();
     		Kraken.getStateManager().setState(new MenuState());
     	}
     }

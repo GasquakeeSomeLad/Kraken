@@ -2,6 +2,7 @@ package com.breakfastsoftware.kraken;
 
 import java.awt.Canvas;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -17,7 +18,7 @@ public class Kraken extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private static int width = 800, height = 600;
 	private static String title = "Kraken";
-	private static boolean running = false;
+	private static boolean running = false, sound = true, fancy = false;
 	private static StateManager stateManager;
 	private Thread thread;
 	private static Mouse mouse;
@@ -82,6 +83,14 @@ public class Kraken extends Canvas implements Runnable {
 	}
 	
 	public void update() {
+		if (keyboard.keyDown(KeyEvent.VK_M)) {
+			keyboard.releaseKey(KeyEvent.VK_M);
+			sound = !sound;
+		}
+		if (Kraken.getKeyboard().keyDown(KeyEvent.VK_F)) {
+			Kraken.getKeyboard().releaseKey(KeyEvent.VK_F);
+			fancy = !fancy;
+		}
 		stateManager.update();
 	}
 	
@@ -126,4 +135,12 @@ public class Kraken extends Canvas implements Runnable {
     }
 
 	public static StateManager getStateManager() { return stateManager;}
+
+	public static boolean playSound() {
+		return sound;
+	}
+
+	public static boolean fancy() {
+		return fancy;
+	}
 }

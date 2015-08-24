@@ -12,7 +12,7 @@ public class Submarine extends Entity {
 	private Player player;
 	private EntityManager em;
 	private String retreat = "NO";
-	private boolean inWater, pursuePlayerX;
+	private boolean inWater, pursuePlayerX, alive = true;
 	private int bulletTime = 60;
 
 	public Submarine(Player player, EntityManager em) {
@@ -23,9 +23,19 @@ public class Submarine extends Entity {
 	}
 
 	public void update() {
-		if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
+		if (!alive) {
+			if (++y > 1200) {
+				em.removeDead(this);
+			}
+			return;
+		}
+		else if (Calculations.collision(player.getX(), player.getY(), player.getWidth(), player.getHeight(), x, y, w, h)) {
 			Sound.DESTROY.play();
+			alive = false;
+			em.addEmote(new DeathEmote(x+w/2, y+h/2, em));
 			em.removeSubmarine(this);
+			move(0, h);
+			sprite = Sprite.SUBMARINEDEAD;
 			return;
 		}
 		if (Calculations.getDistanceX(x, player.getX()) < 200 && Calculations.getDistanceY(y, player.getY()) < 200) {
