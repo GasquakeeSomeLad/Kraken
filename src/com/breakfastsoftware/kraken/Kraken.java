@@ -56,29 +56,27 @@ public class Kraken extends Canvas implements Runnable {
 	
 	public void run() {
 		init();
-		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
-		double ns = 1000000000 / amountOfTicks;
-		double delta = 0;
-		int frames = 0;
-		int updates = 0;
-		long Timer = System.currentTimeMillis();
-		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			if (delta >= 1) {
-				updates++;
+		int updates = 0, frames = 0;
+		long nextTime = System.nanoTime(), counter = nextTime,
+				delta = 1000000000/60, delta5 = delta*5;
+
+		while (true) {
+			long currentTime = System.nanoTime();
+			if (currentTime - nextTime >= delta5)
+				nextTime = currentTime;
+			else if (nextTime < currentTime) {
+				nextTime += delta;
 				update();
-				frames++;
-				render();
-				delta--;
+				updates++;
+				if (nextTime > System.nanoTime()) {
+					render();
+					frames++;
+				}
 			}
-			if (System.currentTimeMillis() - Timer >= 1000) {
-				Timer += 1000;
+			if (System.nanoTime() - counter >= 1000000000) {
+				counter+= 1000000000;
 				System.out.println(updates + ", " + frames);
-				frames = 0;
-				updates = 0;
+				frames = updates = 0;
 			}
 		}
 	}

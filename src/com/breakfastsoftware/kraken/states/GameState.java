@@ -3,6 +3,10 @@ package com.breakfastsoftware.kraken.states;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Fish;
@@ -15,19 +19,26 @@ import com.breakfastsoftware.kraken.states.core.ImagedState;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class GameState extends ImagedState {
-	
 	private Player player;
 	private EntityManager em;
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
-    private boolean lenky = false;
+    private boolean fancy = false;
     private int fishTimer = 60 * 15;
+
+    private int[] alphaPixels;
+    private BufferedImage alphaImage;
 
     public GameState() {
         super(2);
+
+        alphaImage = new BufferedImage(Kraken.getGameWidth() / 2, Kraken.getGameHeight() / 2, BufferedImage.TYPE_INT_ARGB);
+        alphaPixels = ((DataBufferInt) alphaImage.getRaster().getDataBuffer()).getData();
+
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 250, camera);
+
         em = new EntityManager();
         em.addCloud(new Cloud(0, 24));
         em.addCloud(new Cloud(156, 20));
@@ -54,8 +65,8 @@ public class GameState extends ImagedState {
             fishTimer = 60*15;
         }
         em.update();
-        camera.setX(player.getCameraX() - Kraken.getGameWidth()/4);
-        camera.setY(player.getCameraY() - Kraken.getGameHeight()/4);
+        camera.setX(player.getCameraX() - Kraken.getGameWidth() / 4);
+        camera.setY(player.getCameraY() - Kraken.getGameHeight() / 4);
         if (camera.getX() <= 0) {
         	camera.setX(0);
         }
@@ -68,15 +79,17 @@ public class GameState extends ImagedState {
         if (camera.getY() >= backgroundImage.getImage().getHeight() - Kraken.getGameHeight()/scale) {
         	camera.setY(backgroundImage.getImage().getHeight() - Kraken.getGameHeight() / scale);
         }
-        if (!lenky && Kraken.getKeyboard().keyDown(KeyEvent.VK_L)) {
-            lenky = true;
+        if (Kraken.getKeyboard().keyDown(KeyEvent.VK_L)) {
+            Kraken.getKeyboard().releaseKey(KeyEvent.VK_L);
             if (backgroundImage == Images.BACKGROUND) {
                 backgroundImage = Images.LENKY;
         	} else {
                 backgroundImage = Images.BACKGROUND;
         	}
-        } else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
-            lenky = false;
+        }
+        if (Kraken.getKeyboard().keyDown(KeyEvent.VK_F)) {
+                Kraken.getKeyboard().releaseKey(KeyEvent.VK_F);
+            fancy = !fancy;
         }
     }
 
@@ -86,11 +99,17 @@ public class GameState extends ImagedState {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 pixels[i+j*width] = backgroundImage.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
+                if (fancy) {
+                    alphaPixels[i+j*width] = Images.ALPHABACKGROUND.getPixels()[(getX()+i)+(getY()+j)*imageWidth];
+                }
             }
         }
         em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         player.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         super.render(g);
+        if (fancy) {
+            g.drawImage(alphaImage, 0, 0, Kraken.getGameWidth(), Kraken.getGameHeight(), null);
+        }
         g.setColor(new Color(32, 32, 32, 100));
         g.fillRect(13, 531, 100*scale, 29);
         g.setColor(new Color(128, 0, 0, 150));
