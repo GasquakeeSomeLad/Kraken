@@ -7,15 +7,17 @@ import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.core.Entity;
 import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.Sprite;
+import com.breakfastsoftware.kraken.states.MenuState;
 import com.breakfastsoftware.kraken.util.Calculations;
 import com.breakfastsoftware.kraken.util.Camera;
 
 public class Player extends Entity {
+	
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
 	private int jabTimer = 0, jabTime = 9;
-
+	private int playerHP = 100;
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
 
 	public Player(int x, int y, Camera camera) {
@@ -23,7 +25,6 @@ public class Player extends Entity {
 		this.camera = camera;
 		w = Sprite.PLAYERHEAD.WIDTH;
 		h = Sprite.PLAYERHEAD.HEIGHT;
-
 		segments.add(new PlayerSegment(this, 1, Sprite.PLAYERSEGMENT1));
 		for (int i = 0; i < 15; i++) {
 			if (i%2 == 0) {
@@ -40,7 +41,6 @@ public class Player extends Entity {
 
 	public void update() {
 		moveLogic();
-
 		if (y < 300 && !jumping) {
 			if (--jumpCounter < 0 && (Kraken.getKeyboard().keyDown(KeyEvent.VK_Z)
 					|| Kraken.getKeyboard().keyDown(KeyEvent.VK_SPACE))) {
@@ -50,16 +50,20 @@ public class Player extends Entity {
 		}
 		if (jumping) {
 			move(400, -jumpTime--);
-			if (y < 220)
+			if (y < 220) {
 				outOfWater = true;
-			else if (y > 230 && outOfWater) {
+			} else if (y > 230 && outOfWater) {
 				jumpTime = 16;
 				jumpCounter = 30;
 				jumping = outOfWater = false;
 			}
 		}
-		for (int i = 0; i < segments.size(); i++)
+		for (int i = 0; i < segments.size(); i++) {
 			segments.get(i).update();
+		}
+		if (playerHP <= 0) {
+			Kraken.getStateManager().setState(new MenuState());
+		}
 	}
 
 	public void moveLogic() {
@@ -92,35 +96,33 @@ public class Player extends Entity {
 
 	public void move(int dx, int dy) {
 		if (jumping) {
-			if (dx == 400)
+			if (dx == 400) {
 				super.move(0, dy);
+			}
 			return;
 		}
-
 		if (dy == 1 || dy == -1) {
 			dy = 0;
 		}
 		if (Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
 			dx = 0;
-		}
-		else if (dx < 0 && direction == RIGHT) {
+		} else if (dx < 0 && direction == RIGHT) {
 			direction = LEFT;
 			super.move(-w + 3, 0);
-		}
-		else if (dx > 0 && direction == LEFT) {
+		} else if (dx > 0 && direction == LEFT) {
 			direction = RIGHT;
 			super.move(w - 3, 0);
 		}
 		super.move(dx, dy);
-
 		if (y < 230) {
 			y = 230;
 		}
 	}
 
 	public void render(int cameraX, int cameraY, int screenWidth, int[] pixels) {
-		for (int i = segments.size()-1; i >=0; i--)
+		for (int i = segments.size()-1; i >=0; i--) {
 			segments.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
 		super.render(cameraX, cameraY, screenWidth, pixels);
 	}
 
@@ -131,4 +133,13 @@ public class Player extends Entity {
 	public int getCameraY() {
 		return segments.get(segments.size()/2).getY();
 	}
+
+	public int getPlayerHP() {
+		return playerHP;
+	}
+
+	public void setPlayerHP(int playerHP) {
+		this.playerHP = playerHP;
+	}
+	
 }

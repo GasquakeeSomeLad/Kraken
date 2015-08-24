@@ -6,10 +6,6 @@ import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.res.visuals.Sprite;
 import com.breakfastsoftware.kraken.util.Calculations;
 
-/**
- * Created by Gasquakee on 8/23/2015.
- */
-
 public class Submarine extends Entity {
 
 	private Player player;
@@ -26,11 +22,11 @@ public class Submarine extends Entity {
 	}
 
 	public void update() {
-		if (Calculations.getDistanceX(x, player.getX()) < 120 && Calculations.getDistanceY(y, player.getY()) < 100) {
+		if (Calculations.getDistanceX(x, player.getX()) < 100 && Calculations.getDistanceY(y, player.getY()) < 100) {
 			pursuePlayerX = false;
 			bulletTime--;
 			if (bulletTime <= 0) {
-				em.addBullet(new Bullet(x + 30, y + 30, player, em, false));
+				em.addBullet(new Bullet(x + 20, y + 20, player, em, false));
 				bulletTime = 60;
 			}
 		} else {
@@ -38,7 +34,7 @@ public class Submarine extends Entity {
 			retreat = "NO";
 		}
 		if (!pursuePlayerX && retreat == "NO") {
-			if (Calculations.getDistanceX(x, player.getX()) < 90 && Calculations.getDistanceX(y, player.getY()) < 50) {
+			if (Calculations.getDistanceX(x, player.getX()) < 80 && Calculations.getDistanceX(y, player.getY()) < 50) {
 				if (player.getDx() > 0) {
 					retreat = "RIGHT";
 				} else if (player.getDx() < 0) {

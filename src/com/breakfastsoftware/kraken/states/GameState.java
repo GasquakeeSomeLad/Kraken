@@ -1,8 +1,8 @@
 package com.breakfastsoftware.kraken.states;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Fish;
@@ -28,7 +28,6 @@ public class GameState extends ImagedState {
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 250, camera);
-
         em = new EntityManager();
         em.addCloud(new Cloud(0, 24));
         em.addCloud(new Cloud(156, 20));
@@ -41,7 +40,6 @@ public class GameState extends ImagedState {
         em.addCloud(new Cloud(1248, 20));
         em.addCloud(new Cloud(1384, 43));
         em.addCloud(new Cloud(1499, 17));
-
         em.addShip(new Ship(70, player, em));
         em.addShip(new Ship(-20, player, em));
         em.addShip(new Ship(-110, player, em));
@@ -93,6 +91,10 @@ public class GameState extends ImagedState {
         em.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         player.render(getX(), getY(), Kraken.getGameWidth()/scale, pixels);
         super.render(g);
+        g.setColor(new Color(32, 32, 32, 100));
+        g.fillRect(13, 531, 100*scale, 29);
+        g.setColor(new Color(128, 0, 0, 150));
+        g.fillRect(13, 531, player.getPlayerHP() * scale, 29);
     }
 
     public int getX() {
@@ -102,4 +104,5 @@ public class GameState extends ImagedState {
     public int getY() {
         return camera.getY();
     }
+
 }
