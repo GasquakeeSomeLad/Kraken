@@ -14,7 +14,7 @@ import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
 import com.breakfastsoftware.kraken.entities.Submarine;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
-import com.breakfastsoftware.kraken.res.Sound;
+import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
