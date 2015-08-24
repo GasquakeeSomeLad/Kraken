@@ -6,18 +6,21 @@ import com.breakfastsoftware.kraken.entities.Bullet;
 import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Ship;
+import com.breakfastsoftware.kraken.entities.Submarine;
 
 public class EntityManager {
 
 	private ArrayList<Cloud> clouds;
 	private ArrayList<Ship> ships;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<Submarine> submarines;
 	private Fish fish;
 
 	public EntityManager() {
 		clouds = new ArrayList<Cloud>();
 		ships = new ArrayList<Ship>();
 		bullets = new ArrayList<Bullet>();
+		submarines = new ArrayList<Submarine>();
 	}
 
 	public void update() {
@@ -29,6 +32,9 @@ public class EntityManager {
 		}
 		for (int i = 0; i < bullets.size(); i ++) {
 			bullets.get(i).update();
+		}
+		for (int i = 0; i < submarines.size(); i ++) {
+			submarines.get(i).update();
 		}
 		if (fish != null) {
 			fish.update();
@@ -45,6 +51,9 @@ public class EntityManager {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).render(cameraX, cameraY, screenWidth, pixels);
 		}
+		for (int i = 0; i < submarines.size(); i++) {
+			submarines.get(i).render(cameraX, cameraY, screenWidth, pixels);
+		}
 		if (fish != null) {
 			fish.render(cameraX, cameraY, screenWidth, pixels);
 		}
@@ -56,6 +65,14 @@ public class EntityManager {
 
 	public void removeBullet(Bullet bullet) {
 		bullets.remove(bullet);
+	}
+
+	public void addSubmarine(Submarine submarine) {
+		submarines.add(submarine);
+	}
+
+	public void removeSubmarine(Submarine submarine) {
+		submarines.remove(submarine);
 	}
 
 	public void addCloud(Cloud cloud) {

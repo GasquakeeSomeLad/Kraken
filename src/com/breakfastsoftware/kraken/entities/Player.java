@@ -97,6 +97,10 @@ public class Player extends Entity {
 			return;
 		}
 
+		if (dy == 1 || dy == -1) {
+			dy = 0;
+		}
+
 		if (Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
 			super.move(0, dy);
 		}

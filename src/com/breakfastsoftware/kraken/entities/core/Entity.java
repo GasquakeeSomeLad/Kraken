@@ -54,6 +54,8 @@ public abstract class Entity {
     public void move(int dx, int dy) {
         x += dx;
         y += dy;
+        this.dx = dx;
+        this.dy = dy;
     }
 
     public int getX() {

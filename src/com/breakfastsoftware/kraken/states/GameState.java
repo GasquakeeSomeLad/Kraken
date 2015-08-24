@@ -8,6 +8,7 @@ import com.breakfastsoftware.kraken.entities.Cloud;
 import com.breakfastsoftware.kraken.entities.Fish;
 import com.breakfastsoftware.kraken.entities.Player;
 import com.breakfastsoftware.kraken.entities.Ship;
+import com.breakfastsoftware.kraken.entities.Submarine;
 import com.breakfastsoftware.kraken.entities.core.EntityManager;
 import com.breakfastsoftware.kraken.res.visuals.Images;
 import com.breakfastsoftware.kraken.states.core.ImagedState;
@@ -20,23 +21,22 @@ public class GameState extends ImagedState {
     private Camera camera;
     private Images backgroundImage = Images.BACKGROUND;
     private boolean lenky = false;
-    private int fishTimer= 60 * 15;
+    private int fishTimer = 60 * 15;
 
     public GameState() {
         super(2);
         camera = new Camera(0, 0, Images.BACKGROUND.getImage().getWidth() - Kraken.getGameWidth()/scale,
                 Images.BACKGROUND.getImage().getHeight()- Kraken.getGameHeight()/scale);
         player = new Player(150, 250, camera);
-
         em = new EntityManager();
-        em.addCloud(new Cloud(-100, 10));
-        em.addCloud(new Cloud(522, 13));
-        em.addCloud(new Cloud(1101, 8));
-
+        em.addCloud(new Cloud(-100, 24));
+        em.addCloud(new Cloud(522, 20));
+        em.addCloud(new Cloud(1101, 15));
         em.addShip(new Ship(70, player, em));
         em.addShip(new Ship(-20, player, em));
         em.addShip(new Ship(-110, player, em));
         em.addShip(new Ship(-200, player, em));
+        em.addSubmarine(new Submarine(player, em));
     }
 
     public void update() {
@@ -60,15 +60,14 @@ public class GameState extends ImagedState {
         if (camera.getY() >= backgroundImage.getImage().getHeight() - Kraken.getGameHeight()/scale) {
         	camera.setY(backgroundImage.getImage().getHeight() - Kraken.getGameHeight() / scale);
         }
-
         if (!lenky && Kraken.getKeyboard().keyDown(KeyEvent.VK_L)) {
             lenky = true;
-            if (backgroundImage == Images.BACKGROUND)
+            if (backgroundImage == Images.BACKGROUND) {
                 backgroundImage = Images.LENKY;
-            else
+        	} else {
                 backgroundImage = Images.BACKGROUND;
-        }
-        else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
+        	}
+        } else if (lenky && Kraken.getKeyboard().keyUp(KeyEvent.VK_L)) {
             lenky = false;
         }
     }
