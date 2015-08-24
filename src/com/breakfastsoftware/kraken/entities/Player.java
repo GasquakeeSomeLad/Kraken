@@ -14,7 +14,7 @@ public class Player extends Entity {
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
-	private int jabTimer = 0, jabTime = 7;
+	private int jabTimer = 0, jabTime = 9;
 
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
 
@@ -24,12 +24,18 @@ public class Player extends Entity {
 		w = Sprite.PLAYERHEAD.WIDTH;
 		h = Sprite.PLAYERHEAD.HEIGHT;
 
-		segments.add(new PlayerSegment(this, 1));
-		for (int i = 0; i < 7; i++)
-			segments.add(new PlayerSegment(segments.get(i)));
-		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERLEGS));
-		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERFEET));
-		segments.add(new PlayerSegment(segments.get(segments.size()-1), 0, Sprite.PLAYERTAIL));
+		segments.add(new PlayerSegment(this, 1, Sprite.PLAYERSEGMENT1));
+		for (int i = 0; i < 15; i++) {
+			if (i%2 == 0) {
+				segments.add(new PlayerSegment(segments.get(i), Sprite.PLAYERSEGMENT2));
+			}
+			else {
+				segments.add(new PlayerSegment(segments.get(i), Sprite.PLAYERSEGMENT1));
+			}
+		}
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 1, Sprite.PLAYERLEGS));
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 1, Sprite.PLAYERFEET));
+		segments.add(new PlayerSegment(segments.get(segments.size()-1), 1, Sprite.PLAYERTAIL));
 	}
 
 	public void update() {
@@ -72,7 +78,7 @@ public class Player extends Entity {
 				}
 				jabTimer = 70;
 				if (jabTime < 0) {
-					jabTime = 7;
+					jabTime = 9;
 				}
 				if (direction == LEFT) {
 					move(-10, 0);
@@ -90,6 +96,7 @@ public class Player extends Entity {
 				super.move(0, dy);
 			return;
 		}
+
 		if (Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
 			super.move(0, dy);
 		}
@@ -102,8 +109,10 @@ public class Player extends Entity {
 			super.move(w - 3, 0);
 		}
 
-		if (!Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1))
+		if (!Calculations.collision(x-camera.getX(), 0, w, 5, Kraken.getMouse().getX()/2, 1, 1, 1)) {
 			super.move(dx, dy);
+		}
+
 		if (y < 230) {
 			y = 230;
 		}

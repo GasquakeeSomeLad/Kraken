@@ -6,7 +6,8 @@ package com.breakfastsoftware.kraken.res.visuals;
 public class Sprite {
     public static final Sprite CLOUD = new Sprite(SpriteSheet.TESTING, 0, 0, 238, 70),
     PLAYERHEAD = new Sprite(SpriteSheet.ENTITIES, 1, 5, 22, 22),
-    PLAYERSEGMENT = new Sprite(SpriteSheet.ENTITIES, 23, 7, 9, 10),
+    PLAYERSEGMENT1 = new Sprite(SpriteSheet.ENTITIES, 23, 7, 5, 10),
+    PLAYERSEGMENT2 = new Sprite(SpriteSheet.ENTITIES, 28, 7, 4, 10),
     PLAYERLEGS = new Sprite(SpriteSheet.ENTITIES, 32, 7, 9, 8),
     PLAYERFEET = new Sprite(SpriteSheet.ENTITIES, 41, 9, 9, 6),
     PLAYERTAIL = new Sprite(SpriteSheet.ENTITIES, 50, 11, 9, 4),
