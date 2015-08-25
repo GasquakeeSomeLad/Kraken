@@ -16,7 +16,7 @@ public class Player extends Entity {
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
-	private int jabTimer = 0, jabTime = 9, biteCounter = 0;
+	private int jabTimer = 0, jabTime = 9;
 	private int playerHP = 100;
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
 
