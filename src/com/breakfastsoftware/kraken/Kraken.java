@@ -15,7 +15,7 @@ public class Kraken extends Canvas implements Runnable {
 	
 	private static final long serialVersionUID = 1L;
 	private static int width = 800, height = 600;
-	private static String title = "Kraken";
+	private static String title = "Lenky";
 	private static boolean running = false, sound = true, fancy = false;
 	private static StateManager stateManager;
 	private Thread thread;

@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by SomeLad on 8/23/2015.
  */
 public enum CustomFont {
-    BLACK("BLKCHCRY.ttf");
+    BLACK("/com/breakfastsoftware/kraken/res/visuals/blkchcry.ttf");
 
     private Font font, underlined;
 
