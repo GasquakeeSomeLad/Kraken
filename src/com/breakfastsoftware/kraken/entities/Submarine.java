@@ -13,7 +13,7 @@ public class Submarine extends Entity {
 	private EntityManager em;
 	private String retreat = "NO";
 	private boolean inWater, pursuePlayerX, alive = true;
-	private int bulletTime = 50;
+	private int bulletTime = 45;
 
 	public Submarine(Player player, EntityManager em) {
 		super((int)(Math.random() * Images.BACKGROUND.getImage().getWidth()),
@@ -39,19 +39,19 @@ public class Submarine extends Entity {
 			sprite = Sprite.SUBMARINEDEAD;
 			return;
 		}
-		if (Calculations.getDistanceX(x, player.getX()) < 180 && Calculations.getDistanceY(y, player.getY()) < 120) {
+		if (Calculations.getDistanceX(x, player.getX()) < 170 && Calculations.getDistanceY(y, player.getY()) < 120) {
 			pursuePlayerX = false;
 			bulletTime--;
 			if (bulletTime <= 0) {
 				em.addBullet(new Bullet(x + 20, y + 20, player, em, false, false));
-				bulletTime = 50;
+				bulletTime = 45;
 			}
 		} else {
 			pursuePlayerX = true;
 			retreat = "NO";
 		}
 		if (!pursuePlayerX && retreat == "NO") {
-			if (Calculations.getDistanceX(x, player.getX()) < 80 && Calculations.getDistanceX(y, player.getY()) < 50) {
+			if (Calculations.getDistanceX(x, player.getX()) < 75 && Calculations.getDistanceX(y, player.getY()) < 50) {
 				if (player.getDx() > 0) {
 					retreat = "RIGHT";
 				} else if (player.getDx() < 0) {

@@ -8,7 +8,7 @@ public class Sprite {
     CLOUD2 = new Sprite(SpriteSheet.ENTITIES, 64, 96, 64, 32),
     PLAYERHEAD = new Sprite(SpriteSheet.ENTITIES, 1, 5, 22, 22),
     PLAYERHEADCLOSING = new Sprite(SpriteSheet.ENTITIES, 128, 35, 22, 17),
-    PLAYERHEADCLOSED = new Sprite(SpriteSheet.ENTITIES, 151, 55, 22, 13),
+    PLAYERHEADCLOSED = new Sprite(SpriteSheet.ENTITIES, 151, 35, 22, 13),
     PLAYERHEADDOWN = new Sprite(SpriteSheet.ENTITIES, 128, 52, 22, 24),
     PLAYERHEADDOWNCLOSING = new Sprite(SpriteSheet.ENTITIES, 151, 52, 22, 22),
     PLAYERHEADDOWNCLOSED = new Sprite(SpriteSheet.ENTITIES, 128, 76, 22, 16),

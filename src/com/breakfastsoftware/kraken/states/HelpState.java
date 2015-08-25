@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-
 import com.breakfastsoftware.kraken.Kraken;
 import com.breakfastsoftware.kraken.res.audio.Sound;
 import com.breakfastsoftware.kraken.res.visuals.CustomFont;
@@ -35,7 +34,7 @@ public class HelpState extends ImagedState {
     	g.setColor(new Color(40, 220, 160, 230));
     	g.drawString("Controls:", 15, 40);
 		g.drawString("Movement: Move mouse around,", 40, 90);
-		g.drawString("Attack: Left Click,", 40, 140);
+		g.drawString("Recreational Biting: Left Click,", 40, 140);
 		g.drawString("Jab: Right Click,", 40, 190);
 		g.drawString("Jump: Space,", 40, 240);
 		g.drawString("Turn music off: M,", 40, 290);

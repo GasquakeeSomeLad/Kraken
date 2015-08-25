@@ -16,7 +16,7 @@ public class Player extends Entity {
 	private Camera camera;
 	private boolean jumping = false, outOfWater = false;
 	private int jumpTime = 16, jumpCounter = 30;
-	private int jabTimer = 0, jabTime = 9;
+	private int jabTimer = 0, jabTime = 9, biteCounter = 0;
 	private int playerHP = 100;
 	ArrayList<PlayerSegment> segments = new ArrayList<PlayerSegment>();
 
@@ -69,11 +69,60 @@ public class Player extends Entity {
 
 	protected void headLogic() {
 		if (Kraken.getMouse().getY()/2-20 > y-camera.getY()) {
-			sprite = Sprite.PLAYERHEADDOWN;
+			sprite = getHead(1);
 		} else if (Kraken.getMouse().getY()/2+20 < y-camera.getY()) {
-			sprite = Sprite.PLAYERHEADUP;
+			sprite = getHead(-1);
 		} else {
-			sprite = Sprite.PLAYERHEAD;
+			sprite = getHead(0);
+		}
+	}
+
+	private Sprite getHead(int look) {
+		if (Kraken.getMouse().left()) {
+			if (look == 0) {
+				if (sprite == Sprite.PLAYERHEAD) {
+					return Sprite.PLAYERHEADCLOSING;
+				} else {
+					return Sprite.PLAYERHEADCLOSED;
+				}
+			}
+			else if (look == 1) {
+				if (sprite == Sprite.PLAYERHEADDOWN) {
+					return Sprite.PLAYERHEADDOWNCLOSING;
+				} else {
+					return Sprite.PLAYERHEADDOWNCLOSED;
+				}
+			}
+			else {
+				if (sprite == Sprite.PLAYERHEADUP) {
+					return Sprite.PLAYERHEADUPCLOSING;
+				} else {
+					return Sprite.PLAYERHEADUPCLOSED;
+				}
+			}
+		}
+		else {
+			if (look ==  0) {
+				if (sprite == Sprite.PLAYERHEADCLOSED) {
+					return Sprite.PLAYERHEADCLOSING;
+				} else {
+					return Sprite.PLAYERHEAD;
+				}
+			}
+			else if (look == 1) {
+				if (sprite == Sprite.PLAYERHEADDOWNCLOSED) {
+					return Sprite.PLAYERHEADDOWNCLOSING;
+				} else {
+					return Sprite.PLAYERHEADDOWN;
+				}
+			}
+			else {
+				if (sprite == Sprite.PLAYERHEADUPCLOSED) {
+					return Sprite.PLAYERHEADUPCLOSING;
+				} else {
+					return Sprite.PLAYERHEADUP;
+				}
+			}
 		}
 	}
 
@@ -154,7 +203,7 @@ public class Player extends Entity {
 	}
 
 	public int getSegmentY() {
-		if (sprite == Sprite.PLAYERHEADUP) {
+		if (sprite == Sprite.PLAYERHEADUP  || sprite == Sprite.PLAYERHEADUPCLOSING || sprite == Sprite.PLAYERHEADUPCLOSED) {
 			return y+3;
 		}
 		return y;

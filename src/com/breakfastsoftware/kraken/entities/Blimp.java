@@ -12,7 +12,7 @@ public class Blimp extends Entity {
 	protected Player player;
     protected boolean move = false, alive = true;
     protected int moveVal = -1;
-    protected int bulletTime = 40;
+    protected int bulletTime = 35;
 
     public Blimp(int x, Player player, EntityManager em) {
         super(x, (int) (Math.random() * 50) + 80, Sprite.BLIMP);
@@ -52,11 +52,11 @@ public class Blimp extends Entity {
             direction = LEFT;
             moveVal = -1;
         }
-        if (x < 1600 && Calculations.getDistanceX(player.getX(), x) < 70) {
+        if (x < 1600 && Calculations.getDistanceX(player.getX(), x) < 75) {
         	bulletTime--;
         	if (bulletTime <= 0) {
         		em.addBullet(new Bullet(x + 30, y + 30, player, em, true, true));
-        		bulletTime = 40;
+        		bulletTime = 35;
         	}
         }
     }

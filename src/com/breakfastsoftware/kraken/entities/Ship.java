@@ -12,7 +12,7 @@ public class Ship extends Entity {
 	protected Player player;
     protected boolean move = false, alive = true;
     protected int moveVal = -1;
-    protected int bulletTime = 50;
+    protected int bulletTime = 30;
 
     public Ship(int x, Player player, EntityManager em) {
         super(x, 210, (Math.random() > .5) ? Sprite.FRIGATE1 : Sprite.FRIGATE2);
@@ -56,11 +56,11 @@ public class Ship extends Entity {
             direction = LEFT;
             moveVal = -1;
         }
-        if (x < 1600 && Calculations.getDistanceX(player.getX(), x) < 100 && Calculations.getDistanceY(player.getY(), y) < 200) {
+        if (x < 1600 && Calculations.getDistanceX(player.getX(), x) < 110 && Calculations.getDistanceY(player.getY(), y) < 200) {
         	bulletTime--;
         	if (bulletTime <= 0) {
         		em.addBullet(new Bullet(x + 30, y + 30, player, em, true, false));
-        		bulletTime = 50;
+        		bulletTime = 30;
         	}
         }
     }
